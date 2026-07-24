@@ -1,0 +1,1403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Field Notes — Job Search Dashboard</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F5F1;
+    --paper-line: rgba(20,32,35,0.035);
+    --ink:#1A2426;
+    --ink-soft:#5b7071;
+    --teal:#1F7A6C;
+    --teal-dark:#123f38;
+    --teal-tint:#DCEDE8;
+    --amber:#D68A42;
+    --amber-tint:#FBEADA;
+    --coral:#BD4C5C;
+    --coral-tint:#F7E1E3;
+    --green:#2F9E68;
+    --green-tint:#DFF1E6;
+    --slate:#5b6d78;
+    --slate-tint:#EDF0F1;
+    --card:#FFFFFF;
+    --border: rgba(20,32,35,0.10);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(20,32,35,0.05), 0 10px 28px -14px rgba(20,32,35,0.18);
+    --shadow-lift: 0 4px 10px rgba(20,32,35,0.06), 0 16px 36px -16px rgba(20,32,35,0.22);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:transparent;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(31,122,108,0.05), transparent),
+      radial-gradient(900px 500px at 100% 0%, rgba(214,138,66,0.05), transparent),
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px),
+      var(--paper);
+    background-size: auto, auto, 34px 34px, 34px 34px, auto;
+    min-height:100vh;
+    padding: 32px 22px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    flex-wrap:wrap;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom:18px; margin-bottom:26px;
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--teal-dark); font-weight:600; margin-bottom:8px;
+  }
+  h1{
+    font-family:'Fraunces', serif; font-weight:600; font-size:38px; line-height:1.05;
+    margin:0 0 6px; letter-spacing:-.01em;
+  }
+  .hero p{margin:0; color:var(--ink-soft); font-size:14.5px; max-width:46ch;}
+  .hero-right{text-align:right; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);}
+  .hero-right .date{font-weight:600; color:var(--ink);}
+
+  /* ---------- About card ---------- */
+  .about-card{
+    background: linear-gradient(135deg, rgba(31,122,108,0.05), rgba(214,138,66,0.04));
+    border:1px solid var(--border); border-radius: var(--radius);
+    padding:18px 20px; margin-bottom:26px; box-shadow: var(--shadow);
+  }
+  .about-badge{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--teal-dark); background:var(--teal-tint);
+    padding:4px 10px; border-radius:20px; margin-bottom:10px;
+  }
+  .about-card p{margin:0 0 12px; font-size:13px; line-height:1.6; color:var(--ink-soft); max-width:72ch;}
+  .about-tags{display:flex; gap:8px; flex-wrap:wrap;}
+  .about-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-soft);
+    border:1px solid var(--border); border-radius:20px; padding:3px 10px; background:var(--card);
+  }
+
+  /* ---------- Opportunity Radar ---------- */
+  .radar-panel{
+    background: var(--card); border:1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding:20px 22px; margin-bottom:28px;
+  }
+  .radar-panel h2{font-family:'Fraunces',serif; font-size:16px; font-weight:600; margin:0 0 4px;}
+  .radar-sub{font-size:12px; color:var(--ink-soft); margin:0 0 16px;}
+  .gap-list{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .gap-chip{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; background:var(--amber-tint); color:#8a5321;
+    border-radius:20px; padding:5px 12px; font-weight:600;
+  }
+  .gap-chip.ok{background:var(--green-tint); color:#1c6b45;}
+  .radar-actions{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .ai-note{font-size:11px; color:var(--ink-soft); font-style:italic;}
+  .ai-results{margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .ai-suggestion-card{
+    border:1px solid var(--teal); border-radius: var(--radius-sm); padding:11px 13px; background:var(--teal-tint);
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .ai-suggestion-card .s-name{font-weight:600; font-size:13px; color:var(--teal-dark);}
+  .ai-suggestion-card .s-meta{font-size:11px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+  .ai-suggestion-card .s-focus{font-size:11.5px; color:var(--ink-soft);}
+  .spinner{
+    width:14px; height:14px; border:2px solid var(--border); border-top-color:var(--teal);
+    border-radius:50%; display:inline-block; animation: spin .7s linear infinite; vertical-align:middle;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @media (max-width:760px){ .ai-results{grid-template-columns:1fr;} }
+
+  /* ---------- Notification banner ---------- */
+  .notify-banner{
+    display:none; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    background: linear-gradient(135deg, rgba(214,138,66,0.12), rgba(31,122,108,0.08));
+    border:1px solid var(--amber); border-radius: var(--radius); padding:14px 18px; margin-bottom:20px;
+  }
+  .notify-banner.show{display:flex;}
+  .notify-text{font-size:13px; color:var(--ink); display:flex; align-items:center; gap:8px;}
+  .notify-dot{width:8px; height:8px; border-radius:50%; background:var(--amber); flex-shrink:0;}
+  .notify-actions{display:flex; gap:8px; flex-shrink:0;}
+  .notify-panel{display:none; margin-top:6px;}
+  .notify-panel.open{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px;}
+  @media (max-width:760px){ .notify-panel.open{grid-template-columns:1fr;} }
+
+  /* ---------- Stat tiles (periodic-table inspired) ---------- */
+  .tiles{
+    display:grid; grid-template-columns: repeat(5, 1fr); gap:12px; margin-bottom:28px;
+  }
+  .tile{
+    background:var(--card); border:1px solid var(--border); border-top:3px solid var(--slate);
+    border-radius: var(--radius-sm); padding:14px 14px 16px; position:relative; box-shadow:var(--shadow);
+    min-height:104px; display:flex; flex-direction:column; justify-content:space-between;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .tile:hover{ transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+  .tile .num{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-soft);
+    position:absolute; top:10px; right:12px;
+  }
+  .tile .symbol{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:12px;
+    letter-spacing:.06em; color:var(--ink-soft);
+  }
+  .tile .value{
+    font-family:'Fraunces',serif; font-size:34px; font-weight:600; line-height:1; margin-top:2px;
+  }
+  .tile .label{font-size:11px; color:var(--ink-soft); margin-top:4px;}
+  .tile.total{border-top-color:var(--ink);}
+  .tile.applied{border-top-color:var(--teal);}
+  .tile.interview{border-top-color:var(--amber);}
+  .tile.offer{border-top-color:var(--green);}
+  .tile.rate{border-top-color:var(--coral);}
+
+  /* ---------- Panels ---------- */
+  .panels{display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:28px;}
+  .panel{background:var(--card); border:1px solid var(--border); border-radius: var(--radius); box-shadow:var(--shadow); padding:20px 20px 18px;}
+  .panel h2{
+    font-family:'Fraunces',serif; font-size:16px; font-weight:600; margin:0 0 14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .panel h2::before{content:''; width:8px; height:8px; background:var(--teal); display:inline-block;}
+  .bar-row{display:grid; grid-template-columns: 108px 1fr 34px; align-items:center; gap:10px; margin-bottom:10px; font-size:12.5px;}
+  .bar-row .name{color:var(--ink-soft); font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .bar-track{
+    height:14px; background: repeating-linear-gradient(90deg, var(--slate-tint) 0 1px, transparent 1px 12.5%);
+    background-color: var(--slate-tint);
+    position:relative; overflow:hidden;
+  }
+  .bar-fill{height:100%; background:var(--teal); transition:width .35s ease;}
+  .bar-row .count{font-family:'IBM Plex Mono',monospace; font-size:12px; text-align:right; color:var(--ink);}
+  .empty-note{color:var(--ink-soft); font-size:12.5px; font-style:italic;}
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  .filters{display:flex; gap:8px; flex-wrap:wrap;}
+  select, input[type=text], input[type=date], textarea{
+    font-family:'Inter',sans-serif; font-size:13px; padding:9px 11px; border:1px solid var(--border);
+    border-radius: var(--radius-sm); background:var(--card); color:var(--ink);
+  }
+  select:focus, input:focus, textarea:focus{outline:2px solid var(--teal); outline-offset:1px;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600; letter-spacing:.03em;
+    padding:10px 18px; border-radius: var(--radius-sm); border:1px solid var(--ink); background:var(--ink); color:#fff; cursor:pointer;
+    transition: transform .12s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{background:var(--teal-dark); border-color:var(--teal-dark);}
+  .btn:active{transform:translateY(1px);}
+  .btn.secondary{background:transparent; color:var(--ink);}
+  .btn.secondary:hover{background:var(--slate-tint);}
+  .btn.small{padding:5px 10px; font-size:11px;}
+
+  /* ---------- Form ---------- */
+  .form-panel{
+    background:var(--card); border:1px solid var(--border); border-radius: var(--radius); box-shadow:var(--shadow);
+    padding:22px; margin-bottom:22px; display:none;
+  }
+  .form-panel.open{display:block;}
+  .form-panel h2{font-family:'Fraunces',serif; font-size:17px; margin:0 0 16px;}
+  .grid-form{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+  .field{display:flex; flex-direction:column; gap:5px;}
+  .field label{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); font-weight:600;}
+  .field.span2{grid-column:span 2;}
+  .field.span3{grid-column:span 3;}
+  .form-actions{display:flex; gap:10px; margin-top:16px; justify-content:flex-end;}
+
+  /* ---------- Table ---------- */
+  .list{display:flex; flex-direction:column; gap:10px;}
+  .row-card{
+    background:var(--card); border:1px solid var(--border); border-left:4px solid var(--slate);
+    border-radius: var(--radius-sm); padding:15px 17px; display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center;
+    box-shadow:var(--shadow); transition: box-shadow .15s ease;
+  }
+  .row-card:hover{ box-shadow: var(--shadow-lift); }
+  .row-card.st-applied{border-left-color:var(--teal);}
+  .row-card.st-interview{border-left-color:var(--amber);}
+  .row-card.st-offer{border-left-color:var(--green);}
+  .row-card.st-rejected, .row-card.st-withdrawn{border-left-color:var(--coral); opacity:.82;}
+  .row-main{display:flex; flex-direction:column; gap:3px;}
+  .row-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+  .row-inst{font-family:'Fraunces',serif; font-weight:600; font-size:16px;}
+  .row-pos{color:var(--ink-soft); font-size:13px;}
+  .row-meta{display:flex; gap:8px; flex-wrap:wrap; font-size:11px; margin-top:4px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; padding:3px 9px; border:1px solid var(--border); border-radius:20px;
+    text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft);
+  }
+  .chip.status{font-weight:600; border-color:transparent;}
+  .chip.status.applied{background:var(--teal-tint); color:var(--teal-dark);}
+  .chip.status.interview{background:var(--amber-tint); color:#8a5321;}
+  .chip.status.offer{background:var(--green-tint); color:#1c6b45;}
+  .chip.status.rejected, .chip.status.withdrawn{background:var(--coral-tint); color:#8a2d3a;}
+  .chip.status.researching{background:var(--slate-tint); color:var(--slate);}
+  .chip.status.onhold{background:var(--slate-tint); color:var(--slate);}
+  .row-notes{font-size:12px; color:var(--ink-soft); margin-top:4px; max-width:60ch;}
+  .row-actions{display:flex; gap:8px;}
+  .icon-btn{
+    background:none; border:1px solid var(--border); border-radius: var(--radius-sm); width:30px; height:30px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; color:var(--ink-soft); transition: all .15s ease;
+  }
+  .icon-btn:hover{border-color:var(--ink); color:var(--ink);}
+
+  .empty-state{
+    text-align:center; padding:56px 20px; border:1.5px dashed var(--border); border-radius: var(--radius); background:var(--card);
+  }
+  .empty-state p{font-family:'Fraunces',serif; font-size:18px; margin:0 0 6px; color:var(--ink);}
+  .empty-state span{color:var(--ink-soft); font-size:13px;}
+
+  /* ---------- Directory ---------- */
+  .dir-controls{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .dir-group{margin-bottom:6px; border-top:1px solid var(--border);}
+  .dir-group-head{
+    display:flex; align-items:center; justify-content:space-between; cursor:pointer;
+    padding:12px 4px; user-select:none;
+  }
+  .dir-group-head:hover{background:var(--slate-tint); border-radius: var(--radius-sm);}
+  .dir-group-title{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600; letter-spacing:.05em;
+    text-transform:uppercase; color:var(--teal-dark); display:flex; align-items:center; gap:8px;
+  }
+  .dir-group-count{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; background:var(--teal-tint); color:var(--teal-dark);
+    padding:2px 8px; border-radius:20px;
+  }
+  .dir-caret{transition:transform .2s ease; color:var(--ink-soft); font-size:11px;}
+  .dir-group.open .dir-caret{transform:rotate(90deg);}
+  .dir-items{display:none; padding:2px 4px 14px;}
+  .dir-group.open .dir-items{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .dir-card{
+    border:1px solid var(--border); border-radius: var(--radius-sm); background:var(--paper); padding:11px 13px;
+    display:flex; flex-direction:column; gap:3px; transition: box-shadow .15s ease;
+  }
+  .dir-card:hover{ box-shadow: var(--shadow); }
+  .dir-card-top{display:flex; justify-content:space-between; gap:8px; align-items:flex-start;}
+  .dir-name{font-weight:600; font-size:13px; line-height:1.3;}
+  .dir-city{font-size:11px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; white-space:nowrap;}
+  .dir-focus{font-size:11.5px; color:var(--ink-soft); line-height:1.35;}
+  .dir-actions{display:flex; gap:8px; margin-top:4px;}
+  .dir-link{font-size:11px; color:var(--teal-dark); text-decoration:none; font-weight:600;}
+  .dir-link:hover{text-decoration:underline;}
+  .dir-add{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; border:1px solid var(--teal); border-radius: 6px; color:var(--teal-dark);
+    background:transparent; padding:4px 9px; cursor:pointer; transition: all .15s ease;
+  }
+  .dir-add:hover{background:var(--teal-tint);}
+  @media (max-width:760px){
+    .dir-group.open .dir-items{grid-template-columns:1fr;}
+  }
+
+  .save-toast{
+    position:fixed; bottom:18px; right:18px; background:var(--ink); color:#fff;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; padding:9px 14px; border-radius: var(--radius-sm);
+    opacity:0; transform:translateY(8px); transition:all .25s ease; pointer-events:none; box-shadow: var(--shadow-lift);
+  }
+  .save-toast.show{opacity:1; transform:translateY(0);}
+
+  /* ---------- Tab navigation ---------- */
+  .tab-nav{
+    position:sticky; top:0; z-index:20; display:flex; gap:2px; margin-bottom:26px;
+    background:var(--paper); padding-top:6px; padding-bottom:2px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .tab-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600; letter-spacing:.03em;
+    text-transform:uppercase; background:none; border:none; color:var(--ink-soft);
+    padding:11px 18px; cursor:pointer; border-bottom:2.5px solid transparent; margin-bottom:-1.5px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .tab-btn:hover{color:var(--ink);}
+  .tab-btn.active{color:var(--teal-dark); border-bottom-color:var(--teal);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block; animation: fadeIn .25s ease;}
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ---------- Modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(20,32,35,0.45); display:none;
+    align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal-box{
+    background:var(--card); border:1px solid var(--border); border-radius: var(--radius); box-shadow: 0 20px 50px -12px rgba(20,32,35,0.35);
+    max-width:400px; width:100%; padding:24px;
+  }
+  .modal-box h3{font-family:'Fraunces',serif; font-size:18px; margin:0 0 8px;}
+  .modal-box p{font-size:13.5px; color:var(--ink-soft); margin:0 0 20px; line-height:1.5;}
+  .modal-actions{display:flex; gap:10px; justify-content:flex-end;}
+  .btn.danger{background:var(--coral); border-color:var(--coral);}
+  .btn.danger:hover{background:#a13a49; border-color:#a13a49;}
+
+  .undo-toast{
+    position:fixed; bottom:18px; left:50%; transform:translateX(-50%) translateY(8px);
+    background:var(--ink); color:#fff; font-family:'Inter',sans-serif; font-size:13px; border-radius: var(--radius-sm);
+    padding:11px 12px 11px 16px; display:flex; align-items:center; gap:14px;
+    opacity:0; pointer-events:none; transition:all .25s ease; z-index:90; box-shadow: var(--shadow-lift);
+  }
+  .undo-toast.show{opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto;}
+  .undo-toast button{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600; color:var(--teal-tint);
+    background:none; border:1px solid rgba(255,255,255,0.35); padding:5px 10px; cursor:pointer;
+    text-transform:uppercase; letter-spacing:.04em;
+  }
+  .undo-toast button:hover{background:rgba(255,255,255,0.1);}
+
+  @media (max-width:760px){
+    .tab-nav{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+    .tab-btn{padding:10px 12px; white-space:nowrap;}
+  }
+
+  @media (max-width:760px){
+    .tiles{grid-template-columns:repeat(2,1fr);}
+    .panels{grid-template-columns:1fr;}
+    .grid-form{grid-template-columns:1fr 1fr;}
+    .field.span2, .field.span3{grid-column:span 2;}
+    .row-card{grid-template-columns:1fr;}
+    .row-actions{justify-content:flex-end;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="notify-banner" id="notifyBanner">
+    <span class="notify-text"><span class="notify-dot"></span> <span id="notifyText">New institutions found.</span></span>
+    <div class="notify-actions">
+      <button class="btn small" id="viewNewBtn">View</button>
+      <button class="btn secondary small" id="dismissNewBtn">Dismiss</button>
+    </div>
+  </div>
+  <div class="notify-panel" id="notifyPanel"></div>
+
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Field Notes · Job Search Log</div>
+      <h1>Education Sector Job Search — Saudi Arabia</h1>
+      <p>PhD, Chemistry Education / Discipline-Based Education Research. Tracking applications across universities, institutes, centers, and education organizations.</p>
+    </div>
+    <div class="hero-right">
+      <div>Last updated</div>
+      <div class="date" id="lastUpdated">—</div>
+    </div>
+  </div>
+
+  <div class="about-card">
+    <span class="about-badge">AI-Assisted Build</span>
+    <p>This tool was designed and iterated through direct collaboration with an AI system — from data modeling and the institution research behind it, to the interactive charts and workflow you see here. It's a small, practical example of applying AI effectively to real problems: not just prompting for text, but directing an iterative build process toward a working, purpose-built product.</p>
+    <div class="about-tags">
+      <span class="about-tag">Applied AI collaboration</span>
+      <span class="about-tag">Data modeling</span>
+      <span class="about-tag">Interactive UI design</span>
+      <span class="about-tag">Iterative refinement</span>
+    </div>
+  </div>
+
+  <div class="tab-nav" id="tabNav">
+    <button class="tab-btn active" data-tab="overview">Overview</button>
+    <button class="tab-btn" data-tab="directory">Directory</button>
+    <button class="tab-btn" data-tab="applications">My Applications</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-overview">
+  <div class="radar-panel">
+    <h2>Opportunity radar</h2>
+    <p class="radar-sub">A quick check of what you might be missing, based on your logged applications vs. the full directory.</p>
+    <div class="gap-list" id="gapList"></div>
+    <div class="radar-actions">
+      <button class="btn secondary small" id="aiScanBtn">🔎 Ask AI to find more opportunities</button>
+      <span class="ai-note">Searches all Saudi regions across education, edtech, certification/accreditation, corporate training, and related sectors relevant to your background. Works here in Claude; needs your own API key if self-hosted.</span>
+    </div>
+    <div id="aiScanStatus" style="margin-top:10px; font-size:12.5px; color:var(--ink-soft);"></div>
+    <div class="ai-results" id="aiResults"></div>
+  </div>
+  <div class="tiles" id="tiles"></div>
+
+  <div class="panels">
+    <div class="panel">
+      <h2>By sector</h2>
+      <div id="sectorBars"></div>
+    </div>
+    <div class="panel">
+      <h2>By status</h2>
+      <div id="statusBars"></div>
+    </div>
+    <div class="panel">
+      <h2>By contact method</h2>
+      <div id="methodBars"></div>
+    </div>
+  </div>
+
+  <div class="panel" id="timelinePanel" style="margin-bottom:28px;">
+    <h2>Your progress over time</h2>
+    <div id="timelineChart"></div>
+  </div>
+
+  </div>
+  <!-- /tab-overview -->
+
+  <div class="tab-panel" id="tab-directory">
+  <div class="panel" id="directoryPanel" style="margin-bottom:28px;">
+    <h2>Institution directory — who to contact</h2>
+    <p style="margin:-8px 0 14px; font-size:12.5px; color:var(--ink-soft);">121 pre-researched institutions across Saudi Arabia, grouped by sector. Filter by city, open a careers page, or add one straight to your tracker.</p>
+    <div class="dir-controls">
+      <select id="dirSector"><option value="">All sectors</option></select>
+      <select id="dirCity"><option value="">All cities</option></select>
+      <input type="text" id="dirSearch" placeholder="Search by name…">
+    </div>
+    <div id="dirGroups"></div>
+  </div>
+  </div>
+  <!-- /tab-directory -->
+
+  <div class="tab-panel" id="tab-applications">
+  <div class="controls">
+    <div class="filters">
+      <select id="filterSector"><option value="">All sectors</option></select>
+      <select id="filterStatus"><option value="">All statuses</option></select>
+      <select id="filterCity"><option value="">All cities</option></select>
+      <input type="text" id="searchBox" placeholder="Search institution or position…" style="min-width:220px;">
+    </div>
+    <button class="btn" id="toggleFormBtn">+ Log application</button>
+  </div>
+
+  <div class="form-panel" id="formPanel">
+    <h2 id="formTitle">Log a new application</h2>
+    <input type="hidden" id="editId">
+    <div class="grid-form">
+      <div class="field span2">
+        <label for="fInstitution">Institution</label>
+        <input list="instList" type="text" id="fInstitution" placeholder="e.g. King Saud University">
+        <datalist id="instList"></datalist>
+      </div>
+      <div class="field">
+        <label for="fSector">Sector</label>
+        <select id="fSector">
+          <option>University</option>
+          <option>Institute</option>
+          <option>Center</option>
+          <option>Organization</option>
+          <option>Foundation</option>
+          <option>Company/Industry</option>
+        </select>
+      </div>
+      <div class="field span2">
+        <label for="fPosition">Position title</label>
+        <input type="text" id="fPosition" placeholder="e.g. Assistant Professor, Science Education">
+      </div>
+      <div class="field">
+        <label for="fCity">City</label>
+        <input type="text" id="fCity" placeholder="e.g. Riyadh">
+      </div>
+      <div class="field">
+        <label for="fStatus">Status</label>
+        <select id="fStatus">
+          <option>Researching</option>
+          <option>Applied</option>
+          <option>Interviewing</option>
+          <option>Offer</option>
+          <option>Rejected</option>
+          <option>On Hold</option>
+          <option>Withdrawn</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fMethod">Contact method</label>
+        <select id="fMethod">
+          <option>Online Portal</option>
+          <option>Direct Email / Cold Outreach</option>
+          <option>Referral / Networking</option>
+          <option>In-Person</option>
+          <option>Recruiter / Agency</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fPriority">Priority</label>
+        <select id="fPriority">
+          <option>High</option>
+          <option selected>Medium</option>
+          <option>Low</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fDate">Date applied</label>
+        <input type="date" id="fDate">
+      </div>
+      <div class="field span3">
+        <label for="fLink">Job posting link (optional)</label>
+        <input type="text" id="fLink" placeholder="https://…">
+      </div>
+      <div class="field span3">
+        <label for="fNotes">Notes</label>
+        <textarea id="fNotes" rows="2" placeholder="Contact person, deadline, follow-up notes…"></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn secondary" id="cancelFormBtn">Cancel</button>
+      <button class="btn" id="saveEntryBtn">Save entry</button>
+    </div>
+  </div>
+
+  <div id="listContainer"></div>
+  </div>
+  <!-- /tab-applications -->
+
+</div>
+
+<div class="save-toast" id="saveToast">Saved</div>
+
+<div class="undo-toast" id="undoToast">
+  <span id="undoMessage">Application deleted</span>
+  <button id="undoBtn">Undo</button>
+</div>
+
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal-box">
+    <h3>Delete this application?</h3>
+    <p id="deleteModalText">This will remove the entry from your tracker. You can undo it for a few seconds after deleting.</p>
+    <div class="modal-actions">
+      <button class="btn secondary" id="cancelDeleteBtn">Cancel</button>
+      <button class="btn danger" id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTORS = ["University","Institute","Center","Organization","Foundation","Company/Industry"];
+const STATUSES = ["Researching","Applied","Interviewing","Offer","Rejected","On Hold","Withdrawn"];
+const METHODS = ["Online Portal","Direct Email / Cold Outreach","Referral / Networking","In-Person","Recruiter / Agency","Other"];
+
+// Full companion Institution Directory (121 records) — same data as the Excel workbook
+const DIRECTORY = [
+{"name": "King Saud University", "sector": "University", "type": "Public", "city": "Riyadh", "region": "Riyadh", "focus": "Chemistry Dept / College of Education", "careers": "https://ejobs.ksu.edu.sa", "notes": "Largest KSA university; strong Chemistry & Education colleges"},
+{"name": "King Abdulaziz University", "sector": "University", "type": "Public", "city": "Jeddah", "region": "Makkah", "focus": "Chemistry Dept / Faculty of Education", "careers": "https://hr.kau.edu.sa", "notes": "Large faculty recruitment program"},
+{"name": "King Fahd University of Petroleum & Minerals (KFUPM)", "sector": "University", "type": "Public", "city": "Dhahran", "region": "Eastern Province", "focus": "Chemistry Dept / Preparatory Year Program", "careers": "https://www.kfupm.edu.sa/careers", "notes": "Strong STEM research; Prep Year hires science-ed instructors"},
+{"name": "King Abdullah University of Science & Technology (KAUST)", "sector": "University", "type": "Public (Graduate research univ.)", "city": "Thuwal", "region": "Makkah", "focus": "Science Education / Outreach / Ibn Rushd Fellowship", "careers": "https://www.kaust.edu.sa/en/about/faculty-positions", "notes": "Also has STEM outreach & postdoc tracks for Saudis"},
+{"name": "Imam Abdulrahman Bin Faisal University (IAU)", "sector": "University", "type": "Public", "city": "Dammam", "region": "Eastern Province", "focus": "Chemistry Dept / College of Education", "careers": "https://iau.edu.sa/en/jobs", "notes": "Growing research profile"},
+{"name": "Imam Mohammad Ibn Saud Islamic University (IMSIU)", "sector": "University", "type": "Public", "city": "Riyadh", "region": "Riyadh", "focus": "College of Science / College of Education", "careers": "https://imamu.edu.sa", "notes": "—"},
+{"name": "King Khalid University", "sector": "University", "type": "Public", "city": "Abha", "region": "Aseer", "focus": "Chemistry Dept / Education College", "careers": "https://kku.edu.sa", "notes": "—"},
+{"name": "Qassim University", "sector": "University", "type": "Public", "city": "Buraydah", "region": "Qassim", "focus": "Chemistry Dept / Education College", "careers": "https://qu.edu.sa", "notes": "—"},
+{"name": "Umm Al-Qura University", "sector": "University", "type": "Public", "city": "Makkah", "region": "Makkah", "focus": "Chemistry Dept / Education College", "careers": "https://uqu.edu.sa", "notes": "—"},
+{"name": "Taibah University", "sector": "University", "type": "Public", "city": "Madinah", "region": "Madinah", "focus": "Chemistry Dept / Education College", "careers": "https://taibahu.edu.sa", "notes": "—"},
+{"name": "Taif University", "sector": "University", "type": "Public", "city": "Taif", "region": "Makkah", "focus": "Chemistry Dept / Education College", "careers": "https://tu.edu.sa", "notes": "—"},
+{"name": "Jazan University", "sector": "University", "type": "Public", "city": "Jazan", "region": "Jazan", "focus": "Chemistry Dept / Education College", "careers": "https://jazanu.edu.sa", "notes": "—"},
+{"name": "Najran University", "sector": "University", "type": "Public", "city": "Najran", "region": "Najran", "focus": "Chemistry Dept / Education College", "careers": "https://nu.edu.sa", "notes": "—"},
+{"name": "Northern Border University", "sector": "University", "type": "Public", "city": "Arar", "region": "Northern Borders", "focus": "Science & Education College", "careers": "https://nbu.edu.sa", "notes": "—"},
+{"name": "University of Hail", "sector": "University", "type": "Public", "city": "Hail", "region": "Hail", "focus": "Chemistry Dept / Education College", "careers": "https://uoh.edu.sa", "notes": "—"},
+{"name": "Al-Baha University", "sector": "University", "type": "Public", "city": "Al Baha", "region": "Al Baha", "focus": "Science & Education College", "careers": "https://bu.edu.sa", "notes": "—"},
+{"name": "Jouf University", "sector": "University", "type": "Public", "city": "Sakaka", "region": "Jouf", "focus": "Science & Education College", "careers": "https://ju.edu.sa", "notes": "—"},
+{"name": "Shaqra University", "sector": "University", "type": "Public", "city": "Shaqra", "region": "Riyadh", "focus": "Science & Education College", "careers": "https://su.edu.sa", "notes": "—"},
+{"name": "Majmaah University", "sector": "University", "type": "Public", "city": "Majmaah", "region": "Riyadh", "focus": "Science & Education College", "careers": "https://mu.edu.sa", "notes": "—"},
+{"name": "Islamic University of Madinah", "sector": "University", "type": "Public", "city": "Madinah", "region": "Madinah", "focus": "College of Science (limited education programs)", "careers": "https://iu.edu.sa", "notes": "Primarily religious studies; check science college"},
+{"name": "Princess Nourah bint Abdulrahman University (PNU)", "sector": "University", "type": "Public (Women's university)", "city": "Riyadh", "region": "Riyadh", "focus": "Chemistry Dept / College of Education", "careers": "https://pnu.edu.sa", "notes": "Large women-only university; strong education college"},
+{"name": "King Faisal University", "sector": "University", "type": "Public", "city": "Al-Ahsa", "region": "Eastern Province", "focus": "Chemistry Dept / Education College", "careers": "https://kfu.edu.sa", "notes": "—"},
+{"name": "Prince Sattam bin Abdulaziz University", "sector": "University", "type": "Public", "city": "Al-Kharj", "region": "Riyadh", "focus": "Chemistry Dept / Education College", "careers": "https://psau.edu.sa", "notes": "—"},
+{"name": "Jubail Industrial College / Royal Commission Colleges", "sector": "Institute", "type": "Public (RCJY)", "city": "Jubail", "region": "Eastern Province", "focus": "Applied Chemistry / Science Foundation Program", "careers": "https://rcjy.gov.sa", "notes": "Industrial-affiliated technical institutes"},
+{"name": "Alfaisal University", "sector": "University", "type": "Private (Non-profit)", "city": "Riyadh", "region": "Riyadh", "focus": "Science & General Education / College of Science", "careers": "https://jobs.alfaisal.edu", "notes": "Active faculty recruitment portal"},
+{"name": "Prince Mohammad Bin Fahd University", "sector": "University", "type": "Private", "city": "Al Khobar", "region": "Eastern Province", "focus": "General Education / Science Dept", "careers": "https://pmu.edu.sa/careers", "notes": "—"},
+{"name": "Effat University", "sector": "University", "type": "Private (Women's university)", "city": "Jeddah", "region": "Makkah", "focus": "Science & Education College", "careers": "https://effatuniversity.edu.sa", "notes": "—"},
+{"name": "Dar Al-Hekma University", "sector": "University", "type": "Private (Women's university)", "city": "Jeddah", "region": "Makkah", "focus": "General Education / STEM", "careers": "https://dah.edu.sa", "notes": "—"},
+{"name": "Al Yamamah University", "sector": "University", "type": "Private", "city": "Riyadh", "region": "Riyadh", "focus": "General Education / Sciences", "careers": "https://yu.edu.sa", "notes": "—"},
+{"name": "Saudi Electronic University", "sector": "University", "type": "Public (blended/online)", "city": "Riyadh (multi-campus)", "region": "Riyadh", "focus": "e-Learning & Curriculum Design", "careers": "https://seu.edu.sa", "notes": "Good fit for instructional-design / online-ed background"},
+{"name": "Arab Open University - Saudi Branch", "sector": "University", "type": "Private (non-profit)", "city": "Riyadh/Jeddah/Dammam", "region": "Multiple", "focus": "Education & Sciences", "careers": "https://arabou.edu.sa", "notes": "—"},
+{"name": "Fahad Bin Sultan University", "sector": "University", "type": "Private", "city": "Tabuk", "region": "Tabuk", "focus": "General Education / Sciences", "careers": "https://fbsu.edu.sa", "notes": "—"},
+{"name": "Batterjee Medical College", "sector": "Institute", "type": "Private", "city": "Jeddah", "region": "Makkah", "focus": "Basic Sciences / Medical Education", "careers": "https://bmc.edu.sa", "notes": "Medical-education focus; chemistry in pre-med curriculum"},
+{"name": "Ministry of Education (MoE) - R&D / Curricula Sector", "sector": "Organization", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Curriculum development, science education policy", "careers": "https://moe.gov.sa/en/Pages/Jobs.aspx", "notes": "Central body for K-12 curriculum and teacher development"},
+{"name": "Education & Training Evaluation Commission (ETEC)", "sector": "Organization", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Assessment design, education quality research", "careers": "https://etec.gov.sa/en/about/Jobs", "notes": "Regulates & evaluates education/training quality"},
+{"name": "National Center for Assessment (Qiyas)", "sector": "Center", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Standardized testing, science assessment development", "careers": "https://qiyas.sa", "notes": "Designs national achievement/aptitude tests"},
+{"name": "Tatweer Company for Educational Services", "sector": "Organization", "type": "Government-owned company", "city": "Riyadh", "region": "Riyadh", "focus": "School improvement programs, teacher training", "careers": "https://tatweer.edu.sa", "notes": "Implements MoE school-transformation projects"},
+{"name": "King Abdulaziz City for Science & Technology (KACST)", "sector": "Center", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Science outreach, STEM research programs", "careers": "https://kacst.edu.sa/eng/Pages/careers.aspx", "notes": "National science & tech research center; STEM outreach"},
+{"name": "National Center for Curriculum Development (part of MoE)", "sector": "Center", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "K-12 curriculum design, subject-matter expert roles", "careers": "https://moe.gov.sa", "notes": "Often needs PhD subject-matter reviewers"},
+{"name": "Human Capability Development Program (Vision 2030)", "sector": "Organization", "type": "Government program", "city": "Riyadh", "region": "Riyadh", "focus": "Education strategy, workforce/skills development", "careers": "https://vision2030.gov.sa/en/programs/hcdp", "notes": "Cross-sector Vision 2030 program office"},
+{"name": "Misk Foundation", "sector": "Foundation", "type": "Non-profit", "city": "Riyadh", "region": "Riyadh", "focus": "STEM education programs, youth science initiatives", "careers": "https://misk.org.sa/careers", "notes": "Runs Misk Schools & STEM/youth development programs"},
+{"name": "King Abdulaziz Center for World Culture (Ithra)", "sector": "Center", "type": "Non-profit (Aramco-funded)", "city": "Dhahran", "region": "Eastern Province", "focus": "Science/education programming, STEM outreach", "careers": "https://ithra.com/en/careers", "notes": "Cultural center with strong STEM/education public programs"},
+{"name": "Saudi Aramco - Learning & Development / Educational Outreach", "sector": "Organization", "type": "Semi-government / Industry", "city": "Dhahran", "region": "Eastern Province", "focus": "STEM outreach programs, corporate training design", "careers": "https://www.aramco.com/en/careers", "notes": "Runs iThra STEM & school-partnership programs"},
+{"name": "SABIC - Learning & Talent Development", "sector": "Organization", "type": "Semi-government / Industry", "city": "Riyadh/Jubail", "region": "Multiple", "focus": "Corporate science training, STEM outreach", "careers": "https://www.sabic.com/en/careers", "notes": "Chemicals company with education/training arms"},
+{"name": "Technical and Vocational Training Corporation (TVTC)", "sector": "Organization", "type": "Government", "city": "Riyadh (multi-campus)", "region": "Nationwide", "focus": "Applied science curriculum, instructor training", "careers": "https://tvtc.gov.sa/en/Jobs", "notes": "Oversees technical colleges nationwide; needs science instructors"},
+{"name": "Colleges of Excellence (Public-Private technical colleges)", "sector": "Institute", "type": "Government-affiliated", "city": "Multiple cities", "region": "Nationwide", "focus": "Applied science / lab instruction", "careers": "https://coe.edu.sa", "notes": "Network of specialized technical colleges"},
+{"name": "Saudi Chemical Society", "sector": "Organization", "type": "Professional / Academic society", "city": "Riyadh (hosted at KSU)", "region": "Riyadh", "focus": "Chemistry research & education community", "careers": "https://scs.org.sa", "notes": "Networking, conferences, occasional project roles"},
+{"name": "National Center for Science and Technology Development", "sector": "Center", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "STEM policy research", "careers": "https://kacst.edu.sa", "notes": "Affiliated with KACST"},
+{"name": "Riyadh Schools", "sector": "Organization", "type": "Private K-12 network", "city": "Riyadh", "region": "Riyadh", "focus": "Science curriculum lead / teacher trainer roles", "careers": "https://riyadhschools.edu.sa/careers", "notes": "Large private K-12 group; occasionally needs PhD curriculum leads"},
+{"name": "Rowad Al-Khaleej Schools", "sector": "Organization", "type": "Private K-12 network", "city": "Riyadh/Jeddah/Dammam", "region": "Multiple", "focus": "Science curriculum / teacher development", "careers": "https://rowad-alkhaleej.com", "notes": "—"},
+{"name": "Manarat Schools", "sector": "Organization", "type": "Private K-12 network", "city": "Jeddah/Riyadh", "region": "Multiple", "focus": "Science curriculum lead", "careers": "https://manarat.edu.sa", "notes": "—"},
+{"name": "British International School / International schools (IB/AP science)", "sector": "Organization", "type": "Private international schools", "city": "Riyadh/Jeddah/Dhahran", "region": "Multiple", "focus": "IB/AP Chemistry & science-education leadership", "careers": "Check individual school sites", "notes": "Many hire PhD-qualified Heads of Science"},
+{"name": "Dar Al Uloom University", "sector": "University", "type": "Private", "city": "Riyadh", "region": "Riyadh", "focus": "General Education / Sciences", "careers": "https://dau.edu.sa", "notes": "—"},
+{"name": "University of Business and Technology (UBT)", "sector": "University", "type": "Private", "city": "Jeddah", "region": "Makkah", "focus": "General Education / Sciences", "careers": "https://ubt.edu.sa", "notes": "—"},
+{"name": "Saudi Digital Academy", "sector": "Organization", "type": "Government-linked (SDAIA)", "city": "Riyadh", "region": "Riyadh", "focus": "STEM/AI education & training design", "careers": "https://sda.edu.sa", "notes": "Growing tech-education body under SDAIA"},
+{"name": "Mawhiba (King Abdulaziz & His Companions Foundation for Giftedness & Creativity)", "sector": "Foundation", "type": "Government-affiliated non-profit", "city": "Riyadh", "region": "Riyadh", "focus": "Gifted education, enrichment program design, curriculum for talented students", "careers": "https://mawhiba.org.sa/careers", "notes": "National body for gifted/talented education; strong fit for education-research background"},
+{"name": "National eLearning Center (NELC)", "sector": "Organization", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "e-Learning policy, instructional design, quality standards for online education", "careers": "https://nelc.gov.sa", "notes": "Regulates & promotes e-learning across KSA education sector"},
+{"name": "Madrasati Platform (National Digital Learning Platform)", "sector": "Organization", "type": "Government-linked (MoE)", "city": "Riyadh", "region": "Riyadh", "focus": "Digital curriculum content, learning-platform design & evaluation", "careers": "https://ta.madrasati.sa", "notes": "National K-12 e-learning platform; content & pedagogy roles"},
+{"name": "Prince Sultan University", "sector": "University", "type": "Private", "city": "Riyadh", "region": "Riyadh", "focus": "General Education / Sciences / Educational Technology", "careers": "https://psu.edu.sa/careers", "notes": "—"},
+{"name": "British Council Saudi Arabia", "sector": "Organization", "type": "International (cultural/education body)", "city": "Riyadh/Jeddah", "region": "Multiple", "focus": "Teacher training, exams (IELTS), education partnerships", "careers": "https://www.britishcouncil.sa/en/about/jobs", "notes": "Runs teacher-development & English/education programs"},
+{"name": "Al-Fozan Social Foundation", "sector": "Foundation", "type": "Non-profit", "city": "Riyadh/Al-Ahsa", "region": "Multiple", "focus": "Education & social development programs, teacher training", "careers": "https://alfozanfoundation.org", "notes": "Active in education-quality and teacher-capacity projects"},
+{"name": "Alwaleed Philanthropies", "sector": "Foundation", "type": "Non-profit", "city": "Riyadh", "region": "Riyadh", "focus": "Education initiatives, scholarships, curriculum/research grants", "careers": "https://www.alwaleedphilanthropies.org/careers", "notes": "Funds education programs regionally and globally"},
+{"name": "King Salman Center for Disability Research", "sector": "Center", "type": "Government-affiliated research center", "city": "Riyadh", "region": "Riyadh", "focus": "Special/inclusive education research", "careers": "https://kscdr.org.sa", "notes": "Relevant if interested in inclusive-education research"},
+{"name": "National Center for Special Education Programs", "sector": "Center", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Special-education curriculum & teacher training", "careers": "https://moe.gov.sa", "notes": "Part of MoE special-education initiatives"},
+{"name": "Ministry of Human Resources & Social Development (Vocational/Life-long Learning)", "sector": "Organization", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Workforce training design, vocational curriculum", "careers": "https://hrsd.gov.sa/en/jobs", "notes": "Oversees national workforce-development & training policy"},
+{"name": "Jeel Learning", "sector": "Company/Industry", "type": "EdTech company", "city": "Riyadh", "region": "Riyadh", "focus": "Curriculum design, learning-content development (edtech)", "careers": "https://jeel.com", "notes": "Saudi edtech startup building K-12 learning tools"},
+{"name": "Alef Education (regional edtech operating in KSA)", "sector": "Company/Industry", "type": "Private EdTech company", "city": "Riyadh (regional HQ Abu Dhabi)", "region": "Riyadh", "focus": "Adaptive learning content, curriculum digitization", "careers": "https://alefeducation.com/careers", "notes": "Edtech firm expanding into Saudi K-12 market"},
+{"name": "Noon Academy", "sector": "Company/Industry", "type": "Private EdTech company", "city": "Riyadh", "region": "Riyadh", "focus": "Online tutoring content, curriculum & assessment design", "careers": "https://noonacademy.com/careers", "notes": "Popular Saudi/regional online learning platform"},
+{"name": "King Abdulaziz Foundation for Research & Archives (Darah)", "sector": "Foundation", "type": "Government-affiliated", "city": "Riyadh", "region": "Riyadh", "focus": "Educational research publishing, archives-based education programs", "careers": "https://darah.org.sa", "notes": "Research & educational-outreach focus"},
+{"name": "Qassim / Riyadh / Jeddah private international schools network (e.g., Rowad, Manarat, British/American curricula)", "sector": "Organization", "type": "Private K-12", "city": "Multiple", "region": "Multiple", "focus": "Head of Science/Education Innovation, curriculum coordinator roles", "careers": "Check individual school career pages", "notes": "Broad category — search each school's site directly"},
+{"name": "University of Tabuk", "sector": "University", "type": "Public", "city": "Tabuk", "region": "Tabuk", "focus": "Chemistry Dept / Education College", "careers": "https://ut.edu.sa", "notes": "Main public university for Tabuk region; campuses also in Duba, Al Wajh, Umluj"},
+{"name": "University of Hafr Al Batin", "sector": "University", "type": "Public", "city": "Hafr Al-Batin", "region": "Eastern Province", "focus": "Chemistry Dept / Education College", "careers": "https://uhb.edu.sa", "notes": "—"},
+{"name": "Prince Mugrin University", "sector": "University", "type": "Private", "city": "Madinah", "region": "Madinah", "focus": "General Education / Sciences", "careers": "https://uqu.edu.sa/pmu", "notes": "Newer private university in Madinah"},
+{"name": "Al-Ghad International Colleges for Applied Medical Sciences (Riyadh / Madinah / Tabuk branches)", "sector": "Institute", "type": "Private", "city": "Riyadh, Madinah, Tabuk", "region": "Multiple", "focus": "Applied science instruction, lab-based teaching roles", "careers": "https://gc.edu.sa", "notes": "Multi-branch private medical-sciences college network"},
+{"name": "Riyadh College of Technology (TVTC)", "sector": "Institute", "type": "Government (TVTC)", "city": "Riyadh", "region": "Riyadh", "focus": "Applied science / lab instruction, curriculum delivery", "careers": "https://tvtc.gov.sa", "notes": "Part of national technical-college network"},
+{"name": "Dammam College of Technology (TVTC)", "sector": "Institute", "type": "Government (TVTC)", "city": "Dammam", "region": "Eastern Province", "focus": "Applied science / lab instruction", "careers": "https://tvtc.gov.sa", "notes": "—"},
+{"name": "Al-Ahsa College of Technology (TVTC)", "sector": "Institute", "type": "Government (TVTC)", "city": "Al-Ahsa", "region": "Eastern Province", "focus": "Applied science / lab instruction", "careers": "https://tvtc.gov.sa", "notes": "—"},
+{"name": "Qatif Technical College (TVTC)", "sector": "Institute", "type": "Government (TVTC)", "city": "Qatif", "region": "Eastern Province", "focus": "Applied science / lab instruction", "careers": "https://tvtc.gov.sa", "notes": "—"},
+{"name": "Al-Madinah College of Technology (TVTC)", "sector": "Institute", "type": "Government (TVTC)", "city": "Madinah", "region": "Madinah", "focus": "Applied science / lab instruction", "careers": "https://tvtc.gov.sa", "notes": "—"},
+{"name": "Tabuk Technical College (TVTC)", "sector": "Institute", "type": "Government (TVTC)", "city": "Tabuk", "region": "Tabuk", "focus": "Applied science / lab instruction", "careers": "https://tvtc.gov.sa", "notes": "—"},
+{"name": "Jazan College of Technology (TVTC)", "sector": "Institute", "type": "Government (TVTC)", "city": "Jazan", "region": "Jazan", "focus": "Applied science / lab instruction", "careers": "https://tvtc.gov.sa", "notes": "—"},
+{"name": "General Directorate of Education — Riyadh", "sector": "Organization", "type": "Government (MoE regional office)", "city": "Riyadh", "region": "Riyadh", "focus": "Curriculum supervision, teacher training, science-education coordination", "careers": "https://riyadhedu.gov.sa", "notes": "Regional MoE office; hires curriculum & training specialists directly"},
+{"name": "General Directorate of Education — Eastern Province (Dammam)", "sector": "Organization", "type": "Government (MoE regional office)", "city": "Dammam", "region": "Eastern Province", "focus": "Curriculum supervision, teacher training", "careers": "https://moe.gov.sa", "notes": "—"},
+{"name": "General Directorate of Education — Madinah", "sector": "Organization", "type": "Government (MoE regional office)", "city": "Madinah", "region": "Madinah", "focus": "Curriculum supervision, teacher training", "careers": "https://moe.gov.sa", "notes": "—"},
+{"name": "General Directorate of Education — Tabuk", "sector": "Organization", "type": "Government (MoE regional office)", "city": "Tabuk", "region": "Tabuk", "focus": "Curriculum supervision, teacher training", "careers": "https://moe.gov.sa", "notes": "—"},
+{"name": "General Directorate of Education — Jazan", "sector": "Organization", "type": "Government (MoE regional office)", "city": "Jazan", "region": "Jazan", "focus": "Curriculum supervision, teacher training", "careers": "https://moe.gov.sa", "notes": "—"},
+{"name": "Human Resources Development Fund (HRDF / Hadaf)", "sector": "Organization", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "National training-program design, workforce upskilling", "careers": "https://hrdf.org.sa/careers", "notes": "Funds and designs national training initiatives"},
+{"name": "stc Academy (stc Group Learning & Development)", "sector": "Company/Industry", "type": "Private (telecom)", "city": "Riyadh", "region": "Riyadh", "focus": "Corporate learning design, digital-skills training", "careers": "https://www.stc.com.sa/careers", "notes": "Telecom operator's dedicated learning & development arm"},
+{"name": "Ma'aden Training Center", "sector": "Company/Industry", "type": "Semi-government (mining)", "city": "Ras Al Khair", "region": "Eastern Province", "focus": "Technical/vocational training design", "careers": "https://www.maaden.com.sa/en/careers", "notes": "Mining company with an in-house training institute"},
+{"name": "Saline Water Conversion Corporation (SWCC) Training Center", "sector": "Organization", "type": "Government", "city": "Al Khobar / Jubail", "region": "Eastern Province", "focus": "Technical training, applied-science instruction", "careers": "https://swcc.gov.sa", "notes": "National desalination authority with training arm"},
+{"name": "Royal Commission for Jubail and Yanbu — Education & Training", "sector": "Organization", "type": "Government", "city": "Jubail", "region": "Eastern Province", "focus": "Industrial-education programs, applied science curriculum", "careers": "https://rcjy.gov.sa", "notes": "Oversees Jubail Industrial College and related training bodies"},
+{"name": "Institute of Public Administration (IPA / معهد الإدارة العامة)", "sector": "Institute", "type": "Government", "city": "Riyadh (branches: Jeddah, Dammam, Madinah, Abha, Qassim)", "region": "Nationwide", "focus": "Professional training design, curriculum development, applied research for public-sector development", "careers": "https://www.ipa.edu.sa", "notes": "Major national training & consulting body for government + private-sector capacity building; regularly hires PhD-qualified training designers and researchers"},
+{"name": "Al-Khaleej Training and Education Company (شركة الخليج للتدريب والتعليم)", "sector": "Company/Industry", "type": "Private (publicly listed)", "city": "Riyadh, Khobar, Al-Ahsa, Madinah, Jeddah, Makkah, Abha, Khamis Mushait", "region": "Nationwide", "focus": "Corporate & vocational training delivery, school/kindergarten curriculum, university preparatory-year program management", "careers": "https://training.alkhaleej.com.sa/en/carrers/", "notes": "One of Saudi's largest private training/education operators — 80+ centers, schools, and runs preparatory-year programs at several universities"},
+{"name": "Doroob Platform (منصة دروب — HRDF)", "sector": "Organization", "type": "Government (HRDF)", "city": "Riyadh", "region": "Riyadh", "focus": "Free national e-learning content design, vocational course development", "careers": "https://doroob.sa", "notes": "HRDF's free online training platform; content-design and instructional roles"},
+{"name": "Bab Rizq Jameel", "sector": "Foundation", "type": "Non-profit (Abdul Latif Jameel)", "city": "Riyadh/Jeddah/Dammam/Madinah", "region": "Multiple", "focus": "Vocational training design, youth employment & skills programs", "careers": "https://babrizqjameel.com", "notes": "Large non-profit running vocational-training and job-readiness programs nationwide"},
+{"name": "INJAZ Saudi Arabia", "sector": "Foundation", "type": "Non-profit (NGO)", "city": "Riyadh", "region": "Riyadh", "focus": "Entrepreneurship & STEM education programs for youth", "careers": "https://injaz.org.sa/careers", "notes": "National NGO delivering applied education/entrepreneurship programs in schools"},
+{"name": "Riyadh Chamber of Commerce — Training Center", "sector": "Organization", "type": "Semi-government (Chamber)", "city": "Riyadh", "region": "Riyadh", "focus": "Professional/vocational training for private-sector workforce", "careers": "https://riyadhchamber.org.sa", "notes": "Chambers of Commerce run active training divisions for member companies"},
+{"name": "Eastern Province Chamber of Commerce — Training Center", "sector": "Organization", "type": "Semi-government (Chamber)", "city": "Khobar/Dammam", "region": "Eastern Province", "focus": "Professional/vocational training for private-sector workforce", "careers": "https://chamber.org.sa", "notes": "—"},
+{"name": "Madinah Chamber of Commerce — Training Center", "sector": "Organization", "type": "Semi-government (Chamber)", "city": "Madinah", "region": "Madinah", "focus": "Professional/vocational training for private-sector workforce", "careers": "https://madinahchamber.com.sa", "notes": "—"},
+{"name": "National Center for Education & Professional Development (المركز الوطني للتطوير المهني التعليمي)", "sector": "Center", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Teacher professional-development standards, licensing-exam design, training accreditation", "careers": "https://ncedu.gov.sa", "notes": "Sets national teacher professional-development & licensing standards — strong DBER fit"},
+{"name": "Learning Resources Company (شركة موارد التعليمية — Tatweer subsidiary)", "sector": "Company/Industry", "type": "Government-owned company", "city": "Riyadh", "region": "Riyadh", "focus": "Curriculum & textbook content development, educational technology", "careers": "https://lrc.sa", "notes": "Produces/develops official K-12 curriculum content nationwide"},
+{"name": "Tuwaiq Academy (أكاديمية طويق)", "sector": "Institute", "type": "Government-linked (SDAIA)", "city": "Riyadh", "region": "Riyadh", "focus": "Free technical/coding bootcamps, STEM curriculum & certificate design", "careers": "https://tuwaiq.edu.sa/careers", "notes": "Runs intensive tech/STEM training programs with certificates"},
+{"name": "Institute of Banking / IOB (معهد الدراسات المصرفية)", "sector": "Institute", "type": "Government-affiliated (SAMA)", "city": "Riyadh", "region": "Riyadh", "focus": "Professional finance & banking certification training", "careers": "https://iob.edu.sa", "notes": "National training body for the banking/finance sector"},
+{"name": "Saudi Organization for Chartered and Professional Accountants (SOCPA)", "sector": "Organization", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Professional accounting certification & training-program design", "careers": "https://socpa.org.sa/careers", "notes": "Regulates and delivers professional accounting qualifications"},
+{"name": "Saudi Council of Engineers (SCE)", "sector": "Organization", "type": "Government", "city": "Riyadh", "region": "Riyadh", "focus": "Professional engineering licensing, continuing-education (CPD) program design", "careers": "https://saudieng.sa", "notes": "Licenses engineers nationwide; runs CPD/training programs"},
+{"name": "Project Management Institute (PMI) — Saudi Arabia Chapter", "sector": "Organization", "type": "Professional non-profit", "city": "Riyadh", "region": "Riyadh", "focus": "PMP/CAPM certification training & community programs", "careers": "https://pmi-ksa.org", "notes": "Local chapter of the global project-management certification body"},
+{"name": "New Horizons Saudi Arabia", "sector": "Company/Industry", "type": "Private (IT/professional training)", "city": "Riyadh, Jeddah, Khobar", "region": "Multiple", "focus": "IT & professional certification training (Microsoft, Cisco, PMP, etc.)", "careers": "https://newhorizons.com.sa/careers", "notes": "International training-center franchise with multiple KSA branches"},
+{"name": "Bayan Academy", "sector": "Company/Industry", "type": "Private (corporate training)", "city": "Riyadh", "region": "Riyadh", "focus": "Corporate training & professional-certificate program delivery", "careers": "https://bayanacademy.com", "notes": "—"},
+{"name": "Global Knowledge Saudi Arabia", "sector": "Company/Industry", "type": "Private (IT/PM training)", "city": "Riyadh", "region": "Riyadh", "focus": "IT & project-management certification training", "careers": "https://globalknowledge.com/en-sa", "notes": "—"},
+{"name": "Institute of Diplomatic Studies (معهد الدراسات الدبلوماسية)", "sector": "Institute", "type": "Government (MOFA-affiliated)", "city": "Riyadh", "region": "Riyadh", "focus": "Diplomatic and policy training, curriculum & research support", "careers": "https://ids.gov.sa", "notes": "Occasionally hires curriculum designers/researchers"},
+{"name": "Rwaq Platform (منصة رواق)", "sector": "Organization", "type": "Private / non-profit (MOOC platform)", "city": "Riyadh", "region": "Riyadh", "focus": "Arabic MOOC content design, instructional design", "careers": "https://rwaq.org", "notes": "Leading Arabic-language free online-course platform"},
+{"name": "Pearson Saudi Arabia (BTEC/Edexcel qualifications)", "sector": "Company/Industry", "type": "Private (international exam/qualifications board)", "city": "Riyadh", "region": "Riyadh", "focus": "Vocational qualification design, assessment development", "careers": "https://qualifications.pearson.com", "notes": "International vocational-qualification provider operating in KSA"},
+{"name": "Cambridge Assessment International Education — Saudi Representative Office", "sector": "Organization", "type": "International (exam board)", "city": "Riyadh", "region": "Riyadh", "focus": "International curriculum & examination design, teacher training", "careers": "https://cambridgeinternational.org", "notes": "Supports Cambridge-curriculum schools across KSA"},
+{"name": "Sulaiman AlRajhi University", "sector": "University", "type": "Private (non-profit)", "city": "Al Bukayriyah, Qassim", "region": "Qassim", "focus": "General Education / Sciences / Health colleges", "careers": "https://sr.edu.sa/careers", "notes": "Large, well-endowed private university; active faculty recruitment"},
+{"name": "Almaarefa University", "sector": "University", "type": "Private", "city": "Riyadh", "region": "Riyadh", "focus": "Health sciences & general education colleges", "careers": "https://mcst.edu.sa", "notes": "—"},
+{"name": "Riyadh Elm University", "sector": "University", "type": "Private", "city": "Riyadh", "region": "Riyadh", "focus": "Health sciences, general education foundation year", "careers": "https://riyadh.edu.sa/careers", "notes": "Formerly Riyadh College of Dentistry and Pharmacy"},
+{"name": "Jubail University College", "sector": "University", "type": "Private (Royal Commission-affiliated)", "city": "Jubail", "region": "Eastern Province", "focus": "General education / applied sciences foundation year", "careers": "https://ucj.edu.sa", "notes": "Operates under the Royal Commission for Jubail and Yanbu"},
+{"name": "Yanbu University College", "sector": "University", "type": "Private (Royal Commission-affiliated)", "city": "Yanbu", "region": "Madinah", "focus": "General education / applied sciences foundation year", "careers": "https://ruc.edu.sa", "notes": "Operates under the Royal Commission for Jubail and Yanbu; located in Madinah region"},
+{"name": "Ibn Sina National College for Medical Studies", "sector": "University", "type": "Private", "city": "Jeddah", "region": "Makkah", "focus": "Health sciences & foundation-year science education", "careers": "https://ibnsina.edu.sa", "notes": "—"},
+{"name": "Knowledge International University", "sector": "University", "type": "Private (online)", "city": "Jeddah (online, distance learning)", "region": "Makkah", "focus": "Distance/online education, Islamic & general studies", "careers": "https://kiu.edu.sa", "notes": "Fully online private university; relevant if interested in distance/e-learning roles"},
+{"name": "Nahda College (Women)", "sector": "University", "type": "Private (Women's college)", "city": "Jeddah", "region": "Makkah", "focus": "General education / sciences", "careers": "https://nahda.edu.sa", "notes": "—"}
+];
+
+const INSTITUTIONS = DIRECTORY.map(d => [d.name, d.sector]);
+let customInstitutions = [];
+function allInstitutions(){ return DIRECTORY.concat(customInstitutions); }
+
+let entries = [];
+let filterSector = "";
+let filterStatus = "";
+let filterCity = "";
+let searchTerm = "";
+let dirSector = "";
+let dirCity = "";
+let dirSearch = "";
+let openGroups = new Set(["University"]);
+
+const $ = (id) => document.getElementById(id);
+
+// ---------- Tab navigation ----------
+function switchTab(name){
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.toggle("active", b.dataset.tab===name));
+  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("active", p.id==="tab-"+name));
+}
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>switchTab(btn.dataset.tab));
+});
+
+function showToast(msg){
+  const t = $("saveToast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 1600);
+}
+
+const STORAGE_KEY = "job_search_dashboard_applications";
+const hasClaudeStorage = (typeof window !== "undefined" && window.storage && typeof window.storage.get === "function");
+
+const CUSTOM_STORAGE_KEY = "job_search_dashboard_custom_institutions";
+
+async function loadData(){
+  try{
+    if(hasClaudeStorage){
+      const res = await window.storage.get("applications", false);
+      entries = res && res.value ? JSON.parse(res.value) : [];
+    } else {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      entries = raw ? JSON.parse(raw) : [];
+    }
+  }catch(e){
+    entries = [];
+  }
+  try{
+    if(hasClaudeStorage){
+      const res2 = await window.storage.get("custom_institutions", false);
+      customInstitutions = res2 && res2.value ? JSON.parse(res2.value) : [];
+    } else {
+      const raw2 = localStorage.getItem(CUSTOM_STORAGE_KEY);
+      customInstitutions = raw2 ? JSON.parse(raw2) : [];
+    }
+  }catch(e){
+    customInstitutions = [];
+  }
+  render();
+}
+
+async function persistCustomInstitutions(){
+  try{
+    if(hasClaudeStorage){
+      await window.storage.set("custom_institutions", JSON.stringify(customInstitutions), false);
+    } else {
+      localStorage.setItem(CUSTOM_STORAGE_KEY, JSON.stringify(customInstitutions));
+    }
+  }catch(e){ /* silent — non-critical */ }
+}
+
+async function persist(){
+  try{
+    if(hasClaudeStorage){
+      const result = await window.storage.set("applications", JSON.stringify(entries), false);
+      if(!result){ showToast("Save failed — try again"); return; }
+    } else {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    }
+    $("lastUpdated").textContent = new Date().toLocaleString(undefined,{dateStyle:"medium", timeStyle:"short"});
+    showToast("Saved");
+  }catch(e){
+    showToast("Save failed — try again");
+  }
+}
+
+function uid(){ return 'a' + Math.random().toString(36).slice(2,10); }
+
+function statusClass(s){
+  return s.toLowerCase().replace(/\s+/g,'');
+}
+
+function computeStats(){
+  const total = entries.length;
+  const applied = entries.filter(e=>["Applied","Interviewing","Offer","Rejected"].includes(e.status)).length;
+  const interviewing = entries.filter(e=>e.status==="Interviewing").length;
+  const offers = entries.filter(e=>e.status==="Offer").length;
+  const decided = entries.filter(e=>["Offer","Rejected"].includes(e.status)).length;
+  const responseRate = applied>0 ? Math.round(((interviewing+offers)/applied)*100) : 0;
+  return {total, applied, interviewing, offers, responseRate};
+}
+
+function renderTiles(){
+  const s = computeStats();
+  const tiles = [
+    {cls:"total", num:"01", symbol:"TOT", value:s.total, label:"Total logged"},
+    {cls:"applied", num:"02", symbol:"APL", value:s.applied, label:"Submitted"},
+    {cls:"interview", num:"03", symbol:"INT", value:s.interviewing, label:"Interviewing"},
+    {cls:"offer", num:"04", symbol:"OFR", value:s.offers, label:"Offers"},
+    {cls:"rate", num:"05", symbol:"RSP", value:s.responseRate+"%", label:"Response rate"},
+  ];
+  $("tiles").innerHTML = tiles.map(t=>`
+    <div class="tile ${t.cls}">
+      <span class="num">${t.num}</span>
+      <span class="symbol">${t.symbol}</span>
+      <span class="value">${t.value}</span>
+      <span class="label">${t.label}</span>
+    </div>
+  `).join("");
+}
+
+function renderBars(containerId, groups, colorVar){
+  const container = $(containerId);
+  const max = Math.max(1, ...Object.values(groups));
+  const entriesArr = Object.entries(groups);
+  container.innerHTML = entriesArr.map(([name,count])=>`
+    <div class="bar-row">
+      <span class="name">${name}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${(count/max)*100}%; background:${colorVar}"></div></div>
+      <span class="count">${count}</span>
+    </div>
+  `).join("") + (entries.length===0 ? `<div class="empty-note" style="margin-top:6px;">No applications logged yet — categories will fill in as you add entries.</div>` : "");
+}
+
+function renderPanels(){
+  const sectorCounts = {}; SECTORS.forEach(s=>sectorCounts[s]=0);
+  const statusCounts = {}; STATUSES.forEach(s=>statusCounts[s]=0);
+  const methodCounts = {}; METHODS.forEach(s=>methodCounts[s]=0);
+  entries.forEach(e=>{
+    if(sectorCounts[e.sector]!==undefined) sectorCounts[e.sector]++;
+    if(statusCounts[e.status]!==undefined) statusCounts[e.status]++;
+    if(methodCounts[e.method]!==undefined) methodCounts[e.method]++;
+  });
+  renderBars("sectorBars", sectorCounts, "var(--teal)");
+  renderBars("statusBars", statusCounts, "var(--amber)");
+  renderBars("methodBars", methodCounts, "var(--coral)");
+}
+
+function renderFilters(){
+  const fs = $("filterSector"), fst = $("filterStatus");
+  if(fs.options.length <= 1){
+    SECTORS.forEach(s=>{ const o=document.createElement("option"); o.value=s; o.textContent=s; fs.appendChild(o); });
+  }
+  if(fst.options.length <= 1){
+    STATUSES.forEach(s=>{ const o=document.createElement("option"); o.value=s; o.textContent=s; fst.appendChild(o); });
+  }
+  const fc = $("filterCity");
+  const cities = Array.from(new Set(entries.map(e=>e.city).filter(Boolean))).sort();
+  const current = fc.value;
+  fc.innerHTML = '<option value="">All cities</option>' + cities.map(c=>`<option value="${escapeAttr(c)}">${escapeHtml(c)}</option>`).join("");
+  fc.value = cities.includes(current) ? current : "";
+}
+
+function renderInstitutionList(){
+  const dl = $("instList");
+  dl.innerHTML = "";
+  allInstitutions().forEach(d=>{
+    const o = document.createElement("option"); o.value = d.name; dl.appendChild(o);
+  });
+}
+
+function renderList(){
+  const container = $("listContainer");
+  let filtered = entries.filter(e=>{
+    if(filterSector && e.sector !== filterSector) return false;
+    if(filterStatus && e.status !== filterStatus) return false;
+    if(filterCity && e.city !== filterCity) return false;
+    if(searchTerm){
+      const hay = (e.institution+" "+e.position).toLowerCase();
+      if(!hay.includes(searchTerm.toLowerCase())) return false;
+    }
+    return true;
+  });
+  filtered.sort((a,b)=> (b.dateApplied||"").localeCompare(a.dateApplied||""));
+
+  if(entries.length === 0){
+    container.innerHTML = `<div class="empty-state">
+      <p>No applications logged yet</p>
+      <span>Click "+ Log application" to add your first one.</span>
+    </div>`;
+    return;
+  }
+  if(filtered.length === 0){
+    container.innerHTML = `<div class="empty-state">
+      <p>No matches</p>
+      <span>Try clearing a filter or search term.</span>
+    </div>`;
+    return;
+  }
+
+  container.innerHTML = `<div class="list">` + filtered.map(e=>`
+    <div class="row-card st-${statusClass(e.status)}">
+      <div class="row-main">
+        <div class="row-top">
+          <span class="row-inst">${escapeHtml(e.institution||"Untitled")}</span>
+          <span class="row-pos">${escapeHtml(e.position||"")}</span>
+        </div>
+        <div class="row-meta">
+          <span class="chip">${escapeHtml(e.sector||"—")}</span>
+          <span class="chip">${escapeHtml(e.city||"—")}</span>
+          <span class="chip status ${statusClass(e.status)}">${escapeHtml(e.status)}</span>
+          <span class="chip">${escapeHtml(e.priority)} priority</span>
+          ${e.method ? `<span class="chip">${escapeHtml(e.method)}</span>` : ""}
+          ${e.dateApplied ? `<span class="chip">${escapeHtml(e.dateApplied)}</span>` : ""}
+        </div>
+        ${e.notes ? `<div class="row-notes">${escapeHtml(e.notes)}</div>` : ""}
+        ${e.link ? `<div class="row-notes"><a href="${escapeAttr(e.link)}" target="_blank" rel="noopener" style="color:var(--teal-dark)">${escapeHtml(e.link)}</a></div>` : ""}
+      </div>
+      <div class="row-actions">
+        <button class="icon-btn" title="Edit" onclick="editEntry('${e.id}')">✎</button>
+        <button class="icon-btn" title="Delete" onclick="deleteEntry('${e.id}')">✕</button>
+      </div>
+    </div>
+  `).join("") + `</div>`;
+}
+
+function escapeHtml(str){
+  return String(str||"").replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function escapeAttr(str){ return escapeHtml(str); }
+
+function renderDirectoryFilters(){
+  const ds = $("dirSector"), dc = $("dirCity");
+  if(ds.options.length <= 1){
+    SECTORS.forEach(s=>{ const o=document.createElement("option"); o.value=s; o.textContent=s; ds.appendChild(o); });
+  }
+  const cities = Array.from(new Set(allInstitutions().map(d=>d.city))).sort();
+  const currentCity = dc.value;
+  dc.innerHTML = '<option value="">All cities</option>' + cities.map(c=>`<option value="${escapeAttr(c)}">${escapeHtml(c)}</option>`).join("");
+  dc.value = cities.includes(currentCity) ? currentCity : "";
+}
+
+function renderDirectory(){
+  const container = $("dirGroups");
+  let list = allInstitutions()
+    .map((d, idx) => ({...d, idx}))
+    .filter(d=>{
+      if(dirSector && d.sector !== dirSector) return false;
+      if(dirCity && d.city !== dirCity) return false;
+      if(dirSearch && !d.name.toLowerCase().includes(dirSearch.toLowerCase())) return false;
+      return true;
+    });
+  const grouped = {};
+  SECTORS.forEach(s=>grouped[s]=[]);
+  list.forEach(d=>{ if(grouped[d.sector]) grouped[d.sector].push(d); });
+
+  container.innerHTML = SECTORS.map(sector=>{
+    const items = grouped[sector];
+    if(items.length === 0) return "";
+    const isOpen = openGroups.has(sector);
+    return `
+      <div class="dir-group ${isOpen ? 'open' : ''}" data-sector="${escapeAttr(sector)}">
+        <div class="dir-group-head" onclick="toggleDirGroup('${escapeAttr(sector)}')">
+          <span class="dir-group-title"><span class="dir-caret">▶</span> ${escapeHtml(sector)}</span>
+          <span class="dir-group-count">${items.length}</span>
+        </div>
+        <div class="dir-items">
+          ${items.map(d=>`
+            <div class="dir-card">
+              <div class="dir-card-top">
+                <span class="dir-name">${escapeHtml(d.name)}</span>
+                <span class="dir-city">${escapeHtml(d.city)}</span>
+              </div>
+              <span class="dir-focus">${escapeHtml(d.focus)}</span>
+              <div class="dir-actions">
+                ${d.careers && d.careers.startsWith("http") ? `<a class="dir-link" href="${escapeAttr(d.careers)}" target="_blank" rel="noopener">Careers page ↗</a>` : ""}
+                <button class="dir-add" data-idx="${d.idx}" onclick="quickAddByIndex(this)">+ Add to tracker</button>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>`;
+  }).join("");
+
+  if(list.length === 0){
+    container.innerHTML = `<div class="empty-note" style="padding:16px 4px;">No institutions match this filter.</div>`;
+  }
+}
+
+window.toggleDirGroup = function(sector){
+  if(openGroups.has(sector)) openGroups.delete(sector); else openGroups.add(sector);
+  renderDirectory();
+};
+
+window.quickAddByIndex = function(btnEl){
+  const idx = parseInt(btnEl.getAttribute("data-idx"), 10);
+  const d = allInstitutions()[idx];
+  if(!d) return;
+  openForm(false);
+  $("fInstitution").value = d.name;
+  $("fSector").value = d.sector;
+  $("fCity").value = d.city;
+  $("fStatus").value = "Researching";
+  $("fMethod").value = "Online Portal";
+  window.scrollTo({top: $("formPanel").offsetTop - 20, behavior:"smooth"});
+};
+
+$("dirSector").addEventListener("change", e=>{ dirSector = e.target.value; renderDirectory(); });
+$("dirCity").addEventListener("change", e=>{ dirCity = e.target.value; renderDirectory(); });
+$("dirSearch").addEventListener("input", e=>{ dirSearch = e.target.value; renderDirectory(); });
+
+function renderTimeline(){
+  const container = $("timelineChart");
+  const dated = entries.filter(e => e.createdAt || e.dateApplied);
+  if(dated.length === 0){
+    container.innerHTML = `<div class="empty-note">Log an application to start tracking your progress over time.</div>`;
+    return;
+  }
+  // group by date (createdAt preferred, fallback to dateApplied)
+  const counts = {};
+  dated.forEach(e=>{
+    const d = e.createdAt || e.dateApplied;
+    counts[d] = (counts[d]||0) + 1;
+  });
+  const dates = Object.keys(counts).sort();
+  let running = 0;
+  const points = dates.map(d=>{ running += counts[d]; return {date:d, total:running}; });
+
+  const W = 900, H = 220, padL = 40, padR = 20, padT = 16, padB = 34;
+  const innerW = W - padL - padR, innerH = H - padT - padB;
+  const maxY = Math.max(4, points[points.length-1].total);
+  const n = points.length;
+
+  const xFor = (i) => n === 1 ? padL + innerW/2 : padL + (innerW * i/(n-1));
+  const yFor = (v) => padT + innerH - (innerH * (v/maxY));
+
+  const pathPts = points.map((p,i)=>`${xFor(i)},${yFor(p.total)}`).join(" ");
+  const areaPts = `${padL},${padT+innerH} ` + pathPts + ` ${xFor(n-1)},${padT+innerH}`;
+
+  // choose a handful of x-axis labels (first, mid, last) to avoid crowding
+  const labelIdxs = n <= 5 ? points.map((_,i)=>i) : [0, Math.floor((n-1)/2), n-1];
+  const yTicks = [0, Math.round(maxY/2), maxY];
+
+  const svg = `
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%; height:auto; font-family:'IBM Plex Mono',monospace;">
+      ${yTicks.map(t=>`
+        <line x1="${padL}" y1="${yFor(t)}" x2="${W-padR}" y2="${yFor(t)}" stroke="var(--border)" stroke-width="1" />
+        <text x="${padL-8}" y="${yFor(t)+4}" text-anchor="end" font-size="10" fill="var(--ink-soft)">${t}</text>
+      `).join("")}
+      <polygon points="${areaPts}" fill="var(--teal-tint)" opacity="0.6"/>
+      <polyline points="${pathPts}" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${points.map((p,i)=>`<circle cx="${xFor(i)}" cy="${yFor(p.total)}" r="3.5" fill="var(--card)" stroke="var(--teal-dark)" stroke-width="2"><title>${p.date}: ${p.total} total</title></circle>`).join("")}
+      ${labelIdxs.map(i=>`<text x="${xFor(i)}" y="${H-10}" text-anchor="middle" font-size="10" fill="var(--ink-soft)">${points[i].date}</text>`).join("")}
+    </svg>
+    <div style="font-size:11.5px; color:var(--ink-soft); margin-top:6px;">Cumulative applications logged — currently at <strong style="color:var(--ink);">${points[n-1].total}</strong> as of ${points[n-1].date}.</div>
+  `;
+  container.innerHTML = svg;
+}
+
+function renderGapAnalysis(){
+  const container = $("gapList");
+  const loggedSectors = new Set(entries.map(e=>e.sector).filter(Boolean));
+  const loggedRegions = new Set(entries.map(e=>e.city).filter(Boolean));
+
+  const all = allInstitutions();
+  const sectorCounts = {};
+  SECTORS.forEach(s=>sectorCounts[s] = all.filter(d=>d.sector===s).length);
+
+  const regionCounts = {};
+  all.forEach(d=>{ regionCounts[d.region] = (regionCounts[d.region]||0) + 1; });
+
+  const missingSectors = SECTORS.filter(s => !loggedSectors.has(s) && sectorCounts[s] > 0);
+  const regionsList = Array.from(new Set(all.map(d=>d.region))).sort();
+  const loggedRegionSet = new Set(entries.map(e=>e.city).filter(Boolean));
+  const missingRegions = regionsList.filter(r => {
+    const citiesInRegion = all.filter(d=>d.region===r).map(d=>d.city);
+    return !citiesInRegion.some(c => loggedRegionSet.has(c));
+  });
+
+  let chips = "";
+  if(entries.length === 0){
+    chips = `<span class="gap-chip">Log your first application to see coverage insights</span>`;
+  } else {
+    if(missingSectors.length === 0 && missingRegions.length === 0){
+      chips = `<span class="gap-chip ok">Great coverage — you have activity across all sectors and regions</span>`;
+    } else {
+      missingSectors.forEach(s=>{
+        chips += `<span class="gap-chip">No applications yet in ${escapeHtml(s)} (${sectorCounts[s]} available)</span>`;
+      });
+      missingRegions.forEach(r=>{
+        const count = all.filter(d=>d.region===r).length;
+        chips += `<span class="gap-chip">Nothing logged in ${escapeHtml(r)} (${count} available)</span>`;
+      });
+    }
+  }
+  container.innerHTML = chips;
+}
+
+function render(){
+  renderTiles();
+  renderPanels();
+  renderTimeline();
+  renderFilters();
+  renderDirectoryFilters();
+  renderDirectory();
+  renderInstitutionList();
+  renderList();
+  renderGapAnalysis();
+}
+
+function openForm(edit){
+  $("formPanel").classList.add("open");
+  $("toggleFormBtn").textContent = "Close form";
+  if(!edit){
+    $("formTitle").textContent = "Log a new application";
+    $("editId").value = "";
+    ["fInstitution","fPosition","fCity","fLink","fNotes"].forEach(id=>$(id).value="");
+    $("fSector").value = "University";
+    $("fStatus").value = "Researching";
+    $("fMethod").value = "Online Portal";
+    $("fPriority").value = "Medium";
+    $("fDate").value = "";
+  }
+}
+
+function closeForm(){
+  $("formPanel").classList.remove("open");
+  $("toggleFormBtn").textContent = "+ Log application";
+}
+
+$("toggleFormBtn").addEventListener("click", ()=>{
+  const isOpen = $("formPanel").classList.contains("open");
+  if(isOpen){ closeForm(); } else { openForm(false); }
+});
+$("cancelFormBtn").addEventListener("click", closeForm);
+
+$("saveEntryBtn").addEventListener("click", async ()=>{
+  const institution = $("fInstitution").value.trim();
+  if(!institution){ $("fInstitution").focus(); return; }
+  const id = $("editId").value || uid();
+  const existing = entries.find(e=>e.id===id);
+  const entry = {
+    id,
+    institution,
+    sector: $("fSector").value,
+    position: $("fPosition").value.trim(),
+    city: $("fCity").value.trim(),
+    status: $("fStatus").value,
+    method: $("fMethod").value,
+    priority: $("fPriority").value,
+    dateApplied: $("fDate").value,
+    link: $("fLink").value.trim(),
+    notes: $("fNotes").value.trim(),
+    createdAt: (existing && existing.createdAt) || new Date().toISOString().slice(0,10),
+  };
+  const idx = entries.findIndex(e=>e.id===id);
+  if(idx >= 0){ entries[idx] = entry; } else { entries.push(entry); }
+  render();
+  closeForm();
+  await persist();
+});
+
+window.editEntry = function(id){
+  const e = entries.find(x=>x.id===id);
+  if(!e) return;
+  openForm(true);
+  $("formTitle").textContent = "Edit application";
+  $("editId").value = e.id;
+  $("fInstitution").value = e.institution||"";
+  $("fSector").value = e.sector||"University";
+  $("fPosition").value = e.position||"";
+  $("fCity").value = e.city||"";
+  $("fStatus").value = e.status||"Researching";
+  $("fMethod").value = e.method||"Online Portal";
+  $("fPriority").value = e.priority||"Medium";
+  $("fDate").value = e.dateApplied||"";
+  $("fLink").value = e.link||"";
+  $("fNotes").value = e.notes||"";
+  window.scrollTo({top:0, behavior:"smooth"});
+};
+
+let pendingDeleteId = null;
+let lastDeleted = null;
+let lastDeletedIndex = null;
+let undoTimer = null;
+
+window.deleteEntry = function(id){
+  const e = entries.find(x=>x.id===id);
+  if(!e) return;
+  pendingDeleteId = id;
+  $("deleteModalText").textContent = `This will remove "${e.institution || 'this entry'}" from your tracker. You can undo it for a few seconds after deleting.`;
+  $("deleteModal").classList.add("show");
+};
+
+$("cancelDeleteBtn").addEventListener("click", ()=>{
+  pendingDeleteId = null;
+  $("deleteModal").classList.remove("show");
+});
+
+$("deleteModal").addEventListener("click", (e)=>{
+  if(e.target === $("deleteModal")){ pendingDeleteId = null; $("deleteModal").classList.remove("show"); }
+});
+
+$("confirmDeleteBtn").addEventListener("click", async ()=>{
+  if(!pendingDeleteId) return;
+  const idx = entries.findIndex(e=>e.id===pendingDeleteId);
+  if(idx === -1){ $("deleteModal").classList.remove("show"); return; }
+  lastDeleted = entries[idx];
+  lastDeletedIndex = idx;
+  entries.splice(idx, 1);
+  $("deleteModal").classList.remove("show");
+  pendingDeleteId = null;
+  render();
+  await persist();
+  showUndoToast(`Deleted "${lastDeleted.institution || 'entry'}"`);
+});
+
+function showUndoToast(msg){
+  clearTimeout(undoTimer);
+  $("undoMessage").textContent = msg;
+  $("undoToast").classList.add("show");
+  undoTimer = setTimeout(()=>{ $("undoToast").classList.remove("show"); lastDeleted = null; }, 6000);
+}
+
+$("undoBtn").addEventListener("click", async ()=>{
+  if(lastDeleted === null) return;
+  const insertAt = Math.min(lastDeletedIndex, entries.length);
+  entries.splice(insertAt, 0, lastDeleted);
+  lastDeleted = null;
+  clearTimeout(undoTimer);
+  $("undoToast").classList.remove("show");
+  render();
+  await persist();
+});
+
+$("filterSector").addEventListener("change", e=>{ filterSector = e.target.value; renderList(); });
+$("filterStatus").addEventListener("change", e=>{ filterStatus = e.target.value; renderList(); });
+$("filterCity").addEventListener("change", e=>{ filterCity = e.target.value; renderList(); });
+$("searchBox").addEventListener("input", e=>{ searchTerm = e.target.value; renderList(); });
+
+$("aiScanBtn").addEventListener("click", async ()=>{
+  const btn = $("aiScanBtn");
+  const statusEl = $("aiScanStatus");
+  const resultsEl = $("aiResults");
+  btn.disabled = true;
+  statusEl.innerHTML = `<span class="spinner"></span> Searching the web for institutions not yet in your directory…`;
+  resultsEl.innerHTML = "";
+
+  const existingNames = allInstitutions().map(d=>d.name).join("; ");
+  const prompt = `You are helping a PhD holder in Chemistry Education / Discipline-Based Education Research (DBER) build the MOST COMPREHENSIVE possible map of employers across Saudi Arabia's broader education and training landscape — not limited narrowly to chemistry or DBER-specific roles, and not limited to any particular region.
+
+Consider the full breadth of sub-sectors within this scope, including: K-12 schools (public and private), higher education, vocational/technical training, corporate learning & development, adult and continuing education, examination and accreditation bodies (assessment design), professional certification bodies, edtech companies (curriculum/content design), education-focused NGOs and foundations, government education-policy bodies, healthcare/medical education (foundation-year science teaching), and special/inclusive education programs with a STEM-accessibility focus.
+
+Institutions already identified (do NOT repeat any of these): ${existingNames}
+
+Search the web across ALL regions of Saudi Arabia — do not limit to any particular city or region — and find 6 to 10 ADDITIONAL real institutions not in the list above. Prioritize sectors or niches that are underrepresented or entirely missing from the existing list, wherever in the country they are.
+
+Respond with ONLY a JSON array, no markdown formatting, no code fences, no explanation before or after. Exact format:
+[{"name":"...","sector":"University|Institute|Center|Organization|Foundation|Company/Industry","city":"...","region":"...","focus":"short description of relevant dept/focus area","careers":"URL or empty string"}]`;
+
+  try{
+    const apiUrl = hasClaudeStorage ? "https://api.anthropic.com/v1/messages" : "/.netlify/functions/ai-scan";
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1800,
+        messages: [{ role: "user", content: prompt }],
+        tools: [{ type: "web_search_20250305", name: "web_search" }]
+      })
+    });
+    if(!response.ok){ throw new Error("API request failed (" + response.status + ")"); }
+    const data = await response.json();
+    const textBlocks = (data.content || []).filter(b=>b.type==="text").map(b=>b.text).join("\n");
+    const cleaned = textBlocks.replace(/```json/gi, "").replace(/```/g, "").trim();
+    const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
+    if(!jsonMatch) throw new Error("Could not parse a suggestion list from the response.");
+    const suggestions = JSON.parse(jsonMatch[0]);
+
+    if(!Array.isArray(suggestions) || suggestions.length === 0){
+      statusEl.textContent = "No new suggestions found this time — your directory may already be quite thorough.";
+      btn.disabled = false;
+      return;
+    }
+
+    statusEl.textContent = `Found ${suggestions.length} suggestion(s) not currently in your directory:`;
+    resultsEl.innerHTML = suggestions.map((s, i) => `
+      <div class="ai-suggestion-card">
+        <span class="s-name">${escapeHtml(s.name||"Untitled")}</span>
+        <span class="s-meta">${escapeHtml(s.sector||"—")} · ${escapeHtml(s.city||"—")}</span>
+        <span class="s-focus">${escapeHtml(s.focus||"")}</span>
+        ${s.careers ? `<a class="dir-link" href="${escapeAttr(s.careers)}" target="_blank" rel="noopener">Careers page ↗</a>` : ""}
+        <button class="dir-add" data-ai-idx="${i}" onclick="addAiSuggestion(this)">+ Add to Directory</button>
+      </div>
+    `).join("");
+    window.__aiSuggestions = suggestions;
+  }catch(err){
+    statusEl.innerHTML = `Couldn't complete the scan (${escapeHtml(err.message)}). This feature calls Claude's API directly — it works when this page is open inside Claude, but needs your own Anthropic API key if you've published this to your own website.`;
+  }
+  btn.disabled = false;
+});
+
+window.addAiSuggestion = async function(btnEl){
+  const idx = parseInt(btnEl.getAttribute("data-ai-idx"), 10);
+  const s = (window.__aiSuggestions || [])[idx];
+  if(!s) return;
+  if(!customInstitutions.some(c => c.name === s.name)){
+    customInstitutions.push({
+      name: s.name, sector: s.sector, type: "", city: s.city, region: s.region || s.city,
+      focus: s.focus || "", careers: s.careers || "", notes: "Discovered via AI opportunity scan"
+    });
+    await persistCustomInstitutions();
+  }
+  btnEl.textContent = "✓ Added";
+  btnEl.disabled = true;
+  render();
+};
+
+const SEEN_SUGGESTIONS_KEY = "job_search_dashboard_seen_suggestions";
+
+async function checkForNewSuggestions(){
+  let data;
+  try{
+    const res = await fetch("./suggestions.json", { cache: "no-store" });
+    if(!res.ok) return;
+    data = await res.json();
+  }catch(e){
+    return; // file not present (e.g. previewing inside Claude, or not deployed yet) — skip silently
+  }
+
+  const seenRaw = localStorage.getItem(SEEN_SUGGESTIONS_KEY);
+  const seenIds = new Set(seenRaw ? JSON.parse(seenRaw) : []);
+  const existingNames = new Set(allInstitutions().map(d=>d.name));
+  const unseen = (data.suggestions || []).filter(s => !seenIds.has(s.id) && !existingNames.has(s.name));
+
+  if(unseen.length === 0) return;
+  window.__scannedSuggestions = unseen;
+
+  $("notifyText").textContent = `${unseen.length} new institution${unseen.length>1?"s":""} found by the automatic scan` +
+    (data.lastScanned ? ` (last run ${new Date(data.lastScanned).toLocaleDateString()})` : "") + ".";
+  $("notifyBanner").classList.add("show");
+}
+
+function markSuggestionsSeen(ids){
+  const seenRaw = localStorage.getItem(SEEN_SUGGESTIONS_KEY);
+  const seen = new Set(seenRaw ? JSON.parse(seenRaw) : []);
+  ids.forEach(id=>seen.add(id));
+  localStorage.setItem(SEEN_SUGGESTIONS_KEY, JSON.stringify(Array.from(seen)));
+}
+
+$("viewNewBtn").addEventListener("click", ()=>{
+  const list = window.__scannedSuggestions || [];
+  const panel = $("notifyPanel");
+  panel.innerHTML = list.map((s, i) => `
+    <div class="ai-suggestion-card">
+      <span class="s-name">${escapeHtml(s.name||"Untitled")}</span>
+      <span class="s-meta">${escapeHtml(s.sector||"—")} · ${escapeHtml(s.city||"—")}</span>
+      <span class="s-focus">${escapeHtml(s.focus||"")}</span>
+      ${s.careers ? `<a class="dir-link" href="${escapeAttr(s.careers)}" target="_blank" rel="noopener">Careers page ↗</a>` : ""}
+      <button class="dir-add" data-scan-idx="${i}" onclick="addScannedSuggestion(this)">+ Add to Directory</button>
+    </div>
+  `).join("");
+  panel.classList.toggle("open");
+});
+
+$("dismissNewBtn").addEventListener("click", ()=>{
+  const list = window.__scannedSuggestions || [];
+  markSuggestionsSeen(list.map(s=>s.id));
+  $("notifyBanner").classList.remove("show");
+  $("notifyPanel").classList.remove("open");
+  $("notifyPanel").innerHTML = "";
+});
+
+window.addScannedSuggestion = async function(btnEl){
+  const idx = parseInt(btnEl.getAttribute("data-scan-idx"), 10);
+  const list = window.__scannedSuggestions || [];
+  const s = list[idx];
+  if(!s) return;
+  if(!customInstitutions.some(c => c.name === s.name)){
+    customInstitutions.push({
+      name: s.name, sector: s.sector, type: "", city: s.city, region: s.region || s.city,
+      focus: s.focus || "", careers: s.careers || "", notes: "Discovered via automated weekly scan"
+    });
+    await persistCustomInstitutions();
+  }
+  markSuggestionsSeen([s.id]);
+  btnEl.textContent = "✓ Added";
+  btnEl.disabled = true;
+  render();
+};
+
+loadData().then(checkForNewSuggestions);
+</script>
+</body>
+</html>
