@@ -1,4 +1,65 @@
 {
-  "lastScanned": null,
-  "suggestions": []
+  "lastScanned": "2026-07-24T09:10:41.735Z",
+  "suggestions": [
+    {
+      "id": "sug_mrypzr5zs6vqgl",
+      "name": "National Institute for Educational Professional Development (NIEPD / المعهد الوطني للتطوير المهني التعليمي)",
+      "sector": "Institute",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "Government body established 2019 responsible for teacher and school-leader professional development across all public education; designs CPD pathways, licensing preparation programs, and cross-sector educator upskilling aligned with Vision 2030",
+      "careers": "https://niepd.gov.sa/en",
+      "discoveredAt": "2026-07-24"
+    },
+    {
+      "id": "sug_mrypzr5zl35uwl",
+      "name": "Saudi Commission for Health Specialties (SCFHS / الهيئة السعودية للتخصصات الصحية)",
+      "sector": "Organization",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "National independent commission overseeing accreditation, postgraduate training programs, continuous professional development, and competency-based assessment for all health professions; designs curricula and examination frameworks for 38+ residency and diploma programs",
+      "careers": "https://scfhs.org.sa/en",
+      "discoveredAt": "2026-07-24"
+    },
+    {
+      "id": "sug_mrypzr5z5uh1qu",
+      "name": "Saudi Arabian Drilling Academy (SADA)",
+      "sector": "Institute",
+      "city": "Abqaiq",
+      "region": "Eastern Province",
+      "focus": "Non-profit sector-specific technical and academic training academy (Saudi Aramco / TVTC partnership) offering diploma apprenticeship programs in drilling, well-control, and upstream energy operations; employs curriculum designers, simulation instructors, and HSE educators",
+      "careers": "https://sada.edu.sa/",
+      "discoveredAt": "2026-07-24"
+    },
+    {
+      "id": "sug_mrypzr5zrdmmtj",
+      "name": "Higher Institute for Paper and Industrial Technologies (HIPIT / المعهد العالي للتقنيات الورقية والصناعية)",
+      "sector": "Institute",
+      "city": "Jeddah",
+      "region": "Makkah Al-Mukarramah Region",
+      "focus": "Non-profit TVTC-supervised technical training institute offering two-year diploma programs in industrial mechanics, industrial electricity, paper production and packaging, and supply chain management for Saudi high school graduates entering the manufacturing sector",
+      "careers": "https://www.hipit.edu.sa/en",
+      "discoveredAt": "2026-07-24"
+    },
+    {
+      "id": "sug_mrypzr5zjc5qvf",
+      "name": "Classera",
+      "sector": "Company/Industry",
+      "city": "Jeddah",
+      "region": "Makkah Al-Mukarramah Region",
+      "focus": "Saudi-founded edtech company (est. 2012) providing an AI-powered Learning Management System and Training Management System serving K-12 schools, universities, and corporate training clients across KSA and 40+ countries; roles in instructional design, content development, and educational technology",
+      "careers": "https://classera.com/en/company/page/careers/",
+      "discoveredAt": "2026-07-24"
+    },
+    {
+      "id": "sug_mrypzr5z15vlo0",
+      "name": "Aanaab (أناب)",
+      "sector": "Company/Industry",
+      "city": "Makkah",
+      "region": "Makkah Al-Mukarramah Region",
+      "focus": "Saudi edtech platform (est. 2016/2019) dedicated to K-12 teacher professional development; offers Arabic-language courses in pedagogy, assessment, curriculum, and AI-in-education; provides Cambridge-certified credentials and school-leader preparation for Saudi teacher licensing exams",
+      "careers": "https://aanaab.com",
+      "discoveredAt": "2026-07-24"
+    }
+  ]
 }
