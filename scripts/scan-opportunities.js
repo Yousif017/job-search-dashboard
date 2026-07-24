@@ -78,4 +78,44 @@ Respond with ONLY a JSON array, no markdown formatting, no explanation before or
   const now = new Date().toISOString();
 
   if (!jsonMatch) {
-    console.log("No parseable suggestions returned this
+    console.log("No parseable suggestions returned this run.");
+    suggestionsData.lastScanned = now;
+    fs.writeFileSync(suggestionsPath, JSON.stringify(suggestionsData, null, 2));
+    return;
+  }
+
+  let newSuggestions = [];
+  try {
+    newSuggestions = JSON.parse(jsonMatch[0]);
+  } catch (e) {
+    console.error("Failed to parse suggestions JSON:", e.message);
+  }
+
+  const added = [];
+  newSuggestions.forEach((s) => {
+    if (s.name && !existingNames.has(s.name)) {
+      const id = "sug_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      suggestionsData.suggestions.push({
+        id,
+        name: s.name,
+        sector: s.sector || "Organization",
+        city: s.city || "",
+        region: s.region || s.city || "",
+        focus: s.focus || "",
+        careers: s.careers || "",
+        discoveredAt: now.slice(0, 10),
+      });
+      existingNames.add(s.name);
+      added.push(s.name);
+    }
+  });
+
+  suggestionsData.lastScanned = now;
+  fs.writeFileSync(suggestionsPath, JSON.stringify(suggestionsData, null, 2));
+  console.log(`Added ${added.length} new suggestion(s): ${added.join(", ") || "(none)"}`);
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
