@@ -1,5 +1,5 @@
 {
-  "lastScanned": "2026-07-24T09:10:41.735Z",
+  "lastScanned": "2026-07-27T15:57:09.130Z",
   "suggestions": [
     {
       "id": "sug_mrypzr5zs6vqgl",
@@ -60,6 +60,66 @@
       "focus": "Saudi edtech platform (est. 2016/2019) dedicated to K-12 teacher professional development; offers Arabic-language courses in pedagogy, assessment, curriculum, and AI-in-education; provides Cambridge-certified credentials and school-leader preparation for Saudi teacher licensing exams",
       "careers": "https://aanaab.com",
       "discoveredAt": "2026-07-24"
+    },
+    {
+      "id": "sug_ms3eu0lmr63ief",
+      "name": "Saudi Mining Polytechnic (SMP)",
+      "sector": "Institute",
+      "city": "Ar'ar",
+      "region": "Northern Borders",
+      "focus": "Non-profit vocational training institute (Ma'aden–TVTC partnership) qualifying Saudi youth for technical roles in mining, cement, and associated industries; curriculum includes chemistry, safety, and geosciences",
+      "careers": "https://smp.edu.sa/en/",
+      "discoveredAt": "2026-07-27"
+    },
+    {
+      "id": "sug_ms3eu0lmgqrnm6",
+      "name": "Elaa Academy (Royal Commission for AlUla)",
+      "sector": "Center",
+      "city": "AlUla",
+      "region": "Al Madinah",
+      "focus": "Vocational and professional development academy for tourism, hospitality, heritage-site management, and destination experience; workforce training arm of the Royal Commission for AlUla",
+      "careers": "https://www.rcu.gov.sa/en/work-with-us/",
+      "discoveredAt": "2026-07-27"
+    },
+    {
+      "id": "sug_ms3eu0lm4m8jwu",
+      "name": "Maarif for Education & Training",
+      "sector": "Company/Industry",
+      "city": "Riyadh",
+      "region": "Riyadh (campuses nationwide)",
+      "focus": "Saudi Arabia's largest private K-12 school operator (60+ schools across the Kingdom under Manarat, Al-Faisaliah, Green Hills, Nour Al-Islam, and GEMS brands); national and international (IB/IGCSE) curricula; significant need for science and STEM educators",
+      "careers": "https://www.maarif.sa/en/careers",
+      "discoveredAt": "2026-07-27"
+    },
+    {
+      "id": "sug_ms3eu0lmhleaor",
+      "name": "King Faisal Specialist Hospital & Research Centre (KFSH&RC) — Education & Training Division",
+      "sector": "Center",
+      "city": "Riyadh",
+      "region": "Riyadh (also Jeddah & Madinah)",
+      "focus": "Academic medical centre with a dedicated Education and Training Office (est. 1976) running postgraduate medical education, simulation-based training, allied health CPD, and continuing medical education; ranked #1 MENA academic medical centre",
+      "careers": "https://www.kfshrc.edu.sa/en/new-careers",
+      "discoveredAt": "2026-07-27"
+    },
+    {
+      "id": "sug_ms3eu0lmx8waod",
+      "name": "YNMO (ينمو)",
+      "sector": "Company/Industry",
+      "city": "Riyadh",
+      "region": "Riyadh",
+      "focus": "Saudi edtech and rehabilitative-technology platform providing AI-driven educational and therapeutic programs for children with disabilities and special needs; partners with educational and governmental institutions across the GCC; relevant to special/inclusive education with a STEM-accessibility angle",
+      "careers": "https://www.linkedin.com/company/ynmo/",
+      "discoveredAt": "2026-07-27"
+    },
+    {
+      "id": "sug_ms3eu0lm9tgam8",
+      "name": "Taawoni (تعاوني)",
+      "sector": "Company/Industry",
+      "city": "Riyadh",
+      "region": "Riyadh",
+      "focus": "Saudi edtech startup (founded 2021) automating cooperative training (co-op) programs and AI-powered professional development, connecting universities and employers; supports curriculum design, internship workflows, and learning & mentorship platforms across industries",
+      "careers": "https://www.linkedin.com/company/taawoni/",
+      "discoveredAt": "2026-07-27"
     }
   ]
 }
