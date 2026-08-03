@@ -1,5 +1,5 @@
 {
-  "lastScanned": "2026-07-27T15:57:09.130Z",
+  "lastScanned": "2026-08-03T16:00:01.388Z",
   "suggestions": [
     {
       "id": "sug_mrypzr5zs6vqgl",
@@ -120,6 +120,66 @@
       "focus": "Saudi edtech startup (founded 2021) automating cooperative training (co-op) programs and AI-powered professional development, connecting universities and employers; supports curriculum design, internship workflows, and learning & mentorship platforms across industries",
       "careers": "https://www.linkedin.com/company/taawoni/",
       "discoveredAt": "2026-07-27"
+    },
+    {
+      "id": "sug_msdf0o6kibk2yn",
+      "name": "Inaya Medical Colleges",
+      "sector": "Institute",
+      "city": "Riyadh",
+      "region": "Riyadh",
+      "focus": "Private allied health sciences college offering undergraduate programs in clinical laboratory sciences, biomedical technology, nuclear medicine, radiological science, nursing, and health informatics — relevant to foundation-year science teaching and health sciences education faculty roles",
+      "careers": "https://inaya.edu.sa/",
+      "discoveredAt": "2026-08-03"
+    },
+    {
+      "id": "sug_msdf0o6kvseagy",
+      "name": "ITQAN — Inspection Technology and Quality Assurance National Institute",
+      "sector": "Institute",
+      "city": "Juaymah (Ras Tanura)",
+      "region": "Eastern Province",
+      "focus": "Not-for-profit technical training institute (Saudi Aramco / TVTC partnership) offering inspection and quality assurance diplomas for the energy sector — relevant to science/technical instruction and curriculum roles in industrial vocational education",
+      "careers": "https://itqan.edu.sa/en/",
+      "discoveredAt": "2026-08-03"
+    },
+    {
+      "id": "sug_msdf0o6kko6cz2",
+      "name": "International Schools Group (ISG)",
+      "sector": "Organization",
+      "city": "Al Khobar / Dammam / Jubail",
+      "region": "Eastern Province",
+      "focus": "Not-for-profit network of five international schools (American School Dhahran, British School Dhahran, ISG Dammam, ISG Jubail, Sara Village School) offering US/British/IB curricula PK–12 — active recruiter for science, STEM, and curriculum development educators",
+      "careers": "https://www.isg.edu.sa/available-positions",
+      "discoveredAt": "2026-08-03"
+    },
+    {
+      "id": "sug_msdf0o6kk8edbk",
+      "name": "IMC Medical College (International Medical Center)",
+      "sector": "Institute",
+      "city": "Jeddah",
+      "region": "Makkah",
+      "focus": "New private medical college (announced 2024) attached to IMC Hospital offering Medicine, Nursing, and Master's in Public Health programs — relevant to health sciences education, anatomy/physiology instruction, and medical curriculum design",
+      "careers": "https://www.imc.med.sa/",
+      "discoveredAt": "2026-08-03"
+    },
+    {
+      "id": "sug_msdf0o6kwujaxr",
+      "name": "EnergyTech (formerly Saudi Petroleum Services Polytechnic — SPSP)",
+      "sector": "Institute",
+      "city": "Dammam / Al Khafji",
+      "region": "Eastern Province",
+      "focus": "Rebranded energy-sector vocational polytechnic (Ministry of Energy / TVTC / Saudi Aramco / Chevron partnership) delivering NVQ-accredited petroleum, drilling, and energy technology training — relevant to technical science instruction, curriculum design, and L&D roles in the energy education niche",
+      "careers": "https://careers.energytech.edu.sa/",
+      "discoveredAt": "2026-08-03"
+    },
+    {
+      "id": "sug_msdf0o6k2y65hd",
+      "name": "EtonHouse International Education Arabia",
+      "sector": "Company/Industry",
+      "city": "Riyadh",
+      "region": "Riyadh",
+      "focus": "Singapore-based international school group operating inquiry-based early years and primary campuses in Riyadh — actively recruits science, STEM, and early-childhood educators; distinct from the generic 'British/American international schools' cluster already listed",
+      "careers": "https://careers.etonhouse.edu.sa/",
+      "discoveredAt": "2026-08-03"
     }
   ]
 }
