@@ -1,5 +1,5 @@
 {
-  "lastScanned": "2026-08-03T16:00:01.388Z",
+  "lastScanned": "2026-08-10T10:41:08.135Z",
   "suggestions": [
     {
       "id": "sug_mrypzr5zs6vqgl",
@@ -180,6 +180,66 @@
       "focus": "Singapore-based international school group operating inquiry-based early years and primary campuses in Riyadh — actively recruits science, STEM, and early-childhood educators; distinct from the generic 'British/American international schools' cluster already listed",
       "careers": "https://careers.etonhouse.edu.sa/",
       "discoveredAt": "2026-08-03"
+    },
+    {
+      "id": "sug_msn3pjjbbd1ha9",
+      "name": "AlGooru (القورو)",
+      "sector": "Company/Industry",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "Saudi Arabia's first NELC-licensed private tutoring platform offering 1-on-1 academic tutoring for K-12 and university students across 20+ subjects, including sciences; hires tutors, curriculum content specialists, and education technology staff",
+      "careers": "https://algooru.com/en/join-as-a-tutor",
+      "discoveredAt": "2026-08-10"
+    },
+    {
+      "id": "sug_msn3pjjbxx381k",
+      "name": "National Center for School Evaluation and Excellence (Tamayuz — تمايز)",
+      "sector": "Center",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "ETEC-affiliated center responsible for school accreditation, curriculum evaluation, national student performance assessment (NAFS), and AI-powered school evaluation tools (Ada'una); a distinct employer from ETEC and Qiyas already listed",
+      "careers": "https://etec.gov.sa/en/centers/ncsee",
+      "discoveredAt": "2026-08-10"
+    },
+    {
+      "id": "sug_msn3pjjbpl59a4",
+      "name": "National Center for Training Evaluation and Accreditation (Masar — مسار)",
+      "sector": "Center",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "ETEC-affiliated body that accredits vocational and technical training programs nationwide, sets training quality standards, and validates training institutions against labor-market benchmarks under Vision 2030",
+      "careers": "https://etec.gov.sa/en/centers/nctea",
+      "discoveredAt": "2026-08-10"
+    },
+    {
+      "id": "sug_msn3pjjb0th1bz",
+      "name": "Naseej International Trading Co. (نسيج)",
+      "sector": "Company/Industry",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "Saudi-headquartered EdTech/IT company (est. 1989) providing LMS platforms, campus management systems, library management, e-learning solutions, and knowledge management services to higher education institutions and knowledge centers across the Arab world; hires instructional technologists, e-learning specialists, and education systems analysts",
+      "careers": "https://careers.naseej.com/",
+      "discoveredAt": "2026-08-10"
+    },
+    {
+      "id": "sug_msn3pjjbf89gds",
+      "name": "Saudi Red Crescent Authority — General Directorate of Academic Affairs and Training (هيئة الهلال الأحمر السعودي — الإدارة العامة للشؤون الأكاديمية والتدريب)",
+      "sector": "Organization",
+      "city": "Riyadh",
+      "region": "Nationwide (branches in all regions)",
+      "focus": "Runs first-aid, emergency medical, and community health-education training programs (including the Life Ambassador First Aid Program) for citizens, health professionals, and school staff across all Saudi regions; a distinct training/education employer in the healthcare-education nexus",
+      "careers": "https://srca.org.sa/en/",
+      "discoveredAt": "2026-08-10"
+    },
+    {
+      "id": "sug_msn3pjjbvbj637",
+      "name": "King Salman Energy Park (SPARK) — Training Zone (مدينة الملك سلمان للطاقة — منطقة التدريب)",
+      "sector": "Center",
+      "city": "Buqayq (between Dammam and Al-Ahsa)",
+      "region": "Eastern Province",
+      "focus": "Industrial city managed by Saudi Aramco containing ten specialized energy-sector training centers focused on vocational workforce development in petrochemicals, drilling, firefighting/industrial safety, and energy technologies; offers vocational training programs aligned with Vision 2030 energy-sector localization goals",
+      "careers": "https://www.spark.sa",
+      "discoveredAt": "2026-08-10"
     }
   ]
 }
