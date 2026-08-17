@@ -1,5 +1,5 @@
 {
-  "lastScanned": "2026-08-10T10:41:08.135Z",
+  "lastScanned": "2026-08-17T08:08:22.882Z",
   "suggestions": [
     {
       "id": "sug_mrypzr5zs6vqgl",
@@ -240,6 +240,66 @@
       "focus": "Industrial city managed by Saudi Aramco containing ten specialized energy-sector training centers focused on vocational workforce development in petrochemicals, drilling, firefighting/industrial safety, and energy technologies; offers vocational training programs aligned with Vision 2030 energy-sector localization goals",
       "careers": "https://www.spark.sa",
       "discoveredAt": "2026-08-10"
+    },
+    {
+      "id": "sug_mswyc28ye6kupu",
+      "name": "KAPSARC School of Public Policy (KSPP)",
+      "sector": "Institute",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "Saudi Arabia's first graduate school dedicated to public policy and executive education; offers master's degrees and executive programs in energy policy, socio-economic policy, and governance — relevant for education-policy research roles",
+      "careers": "https://www.kspp.edu.sa/",
+      "discoveredAt": "2026-08-17"
+    },
+    {
+      "id": "sug_mswyc28yoddtnp",
+      "name": "SDAIA Academy (Saudi Data and AI Authority)",
+      "sector": "Center",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "National AI and data-science training body under SDAIA; delivers bootcamps, upskilling programs, and curriculum frameworks for AI education in schools and universities in alignment with Vision 2030 — highly relevant for STEM/AI curriculum design and education-research roles",
+      "careers": "https://sdaia.gov.sa/en/Sectors/BuildingCapacity/academy/Pages/default.aspx",
+      "discoveredAt": "2026-08-17"
+    },
+    {
+      "id": "sug_mswyc28ymbrbqu",
+      "name": "CRESENT — Center for Research, Education & Simulation Enhanced Training (King Fahad Medical City)",
+      "sector": "Center",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "One of Saudi Arabia's most active medical-education simulation centers; runs four departments including undergraduate simulation, postgraduate simulation, life-support skills training, and curriculum development — relevant for healthcare/science education and curriculum design roles",
+      "careers": "https://www.kfmc.med.sa/EN/ATS/CRESENT/Pages/default.aspx",
+      "discoveredAt": "2026-08-17"
+    },
+    {
+      "id": "sug_mswyc28yjfdbu1",
+      "name": "Ataa Educational Company (شركة عطاء التعليمية)",
+      "sector": "Company/Industry",
+      "city": "Riyadh",
+      "region": "Riyadh Region",
+      "focus": "One of Saudi Arabia's largest publicly listed K-12 private education operators (Tadawul: 4292); manages 21+ educational complexes serving 45,000+ students across national, international, British, French, and Indian curricula — broad hiring across teaching, curriculum, and teacher-development roles",
+      "careers": "https://ataa.sa/en/",
+      "discoveredAt": "2026-08-17"
+    },
+    {
+      "id": "sug_mswyc28y40ys3v",
+      "name": "HTMi Saudi Arabia — Higher Institute for Tourism and Hospitality (HITH)",
+      "sector": "Institute",
+      "city": "Riyadh (also Al-Baha, Jazan)",
+      "region": "Multi-region (Riyadh, Al-Baha, Jazan)",
+      "focus": "Saudi Arabia's largest hospitality and tourism management institute; TVTC strategic-partnership non-profit with UNWTO accreditation and Swiss dual-diploma program via HTMi Switzerland; campuses in Riyadh, Al-Baha, and Jazan — relevant for vocational curriculum design and trainer development roles in an underrepresented sector",
+      "careers": "https://htmisa.com/",
+      "discoveredAt": "2026-08-17"
+    },
+    {
+      "id": "sug_mswyc28yb9s7at",
+      "name": "Bunyan Academy (VET by EHL — Bunyan Riyadh Higher Training Institute)",
+      "sector": "Company/Industry",
+      "city": "Jeddah (also King Abdullah Economic City)",
+      "region": "Makkah Region / Western Region",
+      "focus": "UN Tourism-accredited vocational hospitality and tourism training academy; holds exclusive EHL (Ecole hôtelière de Lausanne) VET license in Saudi Arabia; programs in hotel administration, culinary arts, F&B service, and tourism — niche vocational training and instructor-development roles in a sector absent from the existing list",
+      "careers": "https://www.bunyanacademy.edu.sa/",
+      "discoveredAt": "2026-08-17"
     }
   ]
 }
